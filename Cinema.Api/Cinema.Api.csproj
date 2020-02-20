@@ -167,6 +167,7 @@
     <Compile Include="Controllers\MoviesTypeController.cs" />
     <Compile Include="Controllers\SalonController.cs" />
     <Compile Include="Controllers\SeanceController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -200,6 +201,15 @@
     <Compile Include="Models\Seance\GetAllRequestModel.cs" />
     <Compile Include="Models\Seance\GetByIdRequestModel.cs" />
     <Compile Include="Models\Seance\ListFilterRequestModel.cs" />
+    <Compile Include="Models\User\AddRequestModel.cs" />
+    <Compile Include="Models\User\DeleteRequestModel.cs" />
+    <Compile Include="Models\User\GetAllPaginatedRequestModel.cs" />
+    <Compile Include="Models\User\GetAllRequestModel.cs" />
+    <Compile Include="Models\User\GetByIdRequestModel.cs" />
+    <Compile Include="Models\User\ListFilterRequestModel.cs" />
+    <Compile Include="Models\User\LoginRequestModel.cs" />
+    <Compile Include="Models\User\LoginResponseModel.cs" />
+    <Compile Include="Models\User\LogoutRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

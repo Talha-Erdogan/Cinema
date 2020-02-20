@@ -59,17 +59,23 @@
     <Compile Include="Interfaces\IMoviesTypeService.cs" />
     <Compile Include="Interfaces\ISalonService.cs" />
     <Compile Include="Interfaces\ISeanceService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Interfaces\IUserTokenService.cs" />
     <Compile Include="Models\MoviesType\MoviesTypeSearchFilter.cs" />
     <Compile Include="Models\Movies\MoviesSearchFilter.cs" />
     <Compile Include="Models\Movies\MoviesWithDetail.cs" />
     <Compile Include="Models\PaginatedList.cs" />
     <Compile Include="Models\Salon\SalonSearchFilter.cs" />
     <Compile Include="Models\Seance\SeanceSearchFilter.cs" />
+    <Compile Include="Models\User\UserSearchFilter.cs" />
+    <Compile Include="Models\User\UserWithDetail.cs" />
     <Compile Include="MoviesService.cs" />
     <Compile Include="MoviesTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalonService.cs" />
     <Compile Include="SeanceService.cs" />
+    <Compile Include="UserService.cs" />
+    <Compile Include="UserTokenService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cinema.Api.Data\Cinema.Api.Data.csproj">

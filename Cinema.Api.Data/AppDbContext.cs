@@ -30,5 +30,8 @@ namespace Cinema.Api.Data
         public DbSet<MoviesType> MoviesType { get; set; }
         public DbSet<Salon> Salon { get; set; }
         public DbSet<Seance> Seance { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<UserToken> UserToken { get; set; }
+        public DbSet<Profile> Profile { get; set; }
     }
 }

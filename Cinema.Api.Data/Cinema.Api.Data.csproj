@@ -54,8 +54,11 @@
     <Compile Include="AppDbContext.cs" />
     <Compile Include="Entity\Movies.cs" />
     <Compile Include="Entity\MoviesType.cs" />
+    <Compile Include="Entity\Profile.cs" />
     <Compile Include="Entity\Salon.cs" />
     <Compile Include="Entity\Seance.cs" />
+    <Compile Include="Entity\User.cs" />
+    <Compile Include="Entity\UserToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
