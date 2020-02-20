@@ -162,9 +162,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\MoviesTypeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SalonController.cs" />
     <Compile Include="Controllers\SeanceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -173,6 +175,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApiResponseModel.cs" />
+    <Compile Include="Models\Auth\AddRequestModel.cs" />
+    <Compile Include="Models\Auth\DeleteRequestModel.cs" />
+    <Compile Include="Models\Auth\GetAllPaginatedRequestModel.cs" />
+    <Compile Include="Models\Auth\GetAllRequestModel.cs" />
+    <Compile Include="Models\Auth\GetByIdRequestModel.cs" />
+    <Compile Include="Models\Auth\ListFilterRequestModel.cs" />
     <Compile Include="Models\BaseRequestModel.cs" />
     <Compile Include="Models\BaseResponseModel.cs" />
     <Compile Include="Models\ListBaseRequestModel.cs" />
@@ -189,6 +197,12 @@
     <Compile Include="Models\Movies\GetAllRequestModel.cs" />
     <Compile Include="Models\Movies\GetByIdRequestModel.cs" />
     <Compile Include="Models\Movies\ListFilterRequestModel.cs" />
+    <Compile Include="Models\Profile\AddRequestModel.cs" />
+    <Compile Include="Models\Profile\DeleteRequestModel.cs" />
+    <Compile Include="Models\Profile\GetAllPaginatedRequestModel.cs" />
+    <Compile Include="Models\Profile\GetAllRequestModel.cs" />
+    <Compile Include="Models\Profile\GetByIdRequestModel.cs" />
+    <Compile Include="Models\Profile\ListFilterRequestModel.cs" />
     <Compile Include="Models\Salon\AddRequestModel.cs" />
     <Compile Include="Models\Salon\DeleteRequestModel.cs" />
     <Compile Include="Models\Salon\GetAllPaginatedRequestModel.cs" />

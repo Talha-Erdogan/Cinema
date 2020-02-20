@@ -54,23 +54,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthService.cs" />
     <Compile Include="Enums\ResultStatusCodeStatic.cs" />
+    <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IMoviesService.cs" />
     <Compile Include="Interfaces\IMoviesTypeService.cs" />
+    <Compile Include="Interfaces\IProfileService.cs" />
     <Compile Include="Interfaces\ISalonService.cs" />
     <Compile Include="Interfaces\ISeanceService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Interfaces\IUserTokenService.cs" />
+    <Compile Include="Models\Auth\AuthSearchFilter.cs" />
     <Compile Include="Models\MoviesType\MoviesTypeSearchFilter.cs" />
     <Compile Include="Models\Movies\MoviesSearchFilter.cs" />
     <Compile Include="Models\Movies\MoviesWithDetail.cs" />
     <Compile Include="Models\PaginatedList.cs" />
+    <Compile Include="Models\Profile\ProfileSearchFilter.cs" />
     <Compile Include="Models\Salon\SalonSearchFilter.cs" />
     <Compile Include="Models\Seance\SeanceSearchFilter.cs" />
     <Compile Include="Models\User\UserSearchFilter.cs" />
     <Compile Include="Models\User\UserWithDetail.cs" />
     <Compile Include="MoviesService.cs" />
     <Compile Include="MoviesTypeService.cs" />
+    <Compile Include="ProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalonService.cs" />
     <Compile Include="SeanceService.cs" />
@@ -87,6 +93,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

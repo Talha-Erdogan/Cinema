@@ -278,7 +278,5 @@ namespace Cinema.Api.Controllers
             responseModel.ResultStatusCode = ResultStatusCodeStatic.Success;
             return responseModel;
         }
-
-
     }
 }

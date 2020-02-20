@@ -33,5 +33,6 @@ namespace Cinema.Api.Data
         public DbSet<User> User { get; set; }
         public DbSet<UserToken> UserToken { get; set; }
         public DbSet<Profile> Profile { get; set; }
+        public DbSet<Auth> Auth { get; set; }
     }
 }

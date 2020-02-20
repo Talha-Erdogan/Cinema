@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDbContext.cs" />
+    <Compile Include="Entity\Auth.cs" />
     <Compile Include="Entity\Movies.cs" />
     <Compile Include="Entity\MoviesType.cs" />
     <Compile Include="Entity\Profile.cs" />
