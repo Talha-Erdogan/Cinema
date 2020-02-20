@@ -95,6 +95,18 @@ namespace Cinema.Api.Business
             return resultList;
         }
 
+        public Salon GetById(int id)
+        {
+            Salon result = new Salon();
+
+            using (AppDbContext dbContext = new AppDbContext())
+            {
+                result = dbContext.Salon.Where(r => r.Id == id && r.IsDeleted == false).AsNoTracking().SingleOrDefault();
+            }
+
+            return result;
+        }
+
         public int Add(Salon record)
         {
             int result = 0;

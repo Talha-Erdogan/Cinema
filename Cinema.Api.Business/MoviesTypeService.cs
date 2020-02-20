@@ -91,6 +91,18 @@ namespace Cinema.Api.Business
             return resultList;
         }
 
+        public MoviesType GetById(int id)
+        {
+            MoviesType result = new MoviesType();
+
+            using (AppDbContext dbContext = new AppDbContext())
+            {
+                result = dbContext.MoviesType.Where(r => r.Id == id && r.IsDeleted == false).AsNoTracking().SingleOrDefault();
+            }
+
+            return result;
+        }
+
         public int Add(MoviesType record)
         {
             int result = 0;

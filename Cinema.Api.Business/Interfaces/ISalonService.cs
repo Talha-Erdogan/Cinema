@@ -13,6 +13,7 @@ namespace Cinema.Api.Business.Interfaces
     {
         PaginatedList<Salon> GetAllPaginatedBySearchFilter(SalonSearchFilter searchFilter);
         List<Salon> GetAll();
+        Salon GetById(int id);
         int Add(Salon record);
         int Update(Salon record);
         int Delete(Salon record);

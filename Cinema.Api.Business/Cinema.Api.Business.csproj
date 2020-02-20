@@ -54,9 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\ResultStatusCodeStatic.cs" />
     <Compile Include="Interfaces\IMoviesService.cs" />
     <Compile Include="Interfaces\IMoviesTypeService.cs" />
     <Compile Include="Interfaces\ISalonService.cs" />
+    <Compile Include="Interfaces\ISeanceService.cs" />
     <Compile Include="Models\MoviesType\MoviesTypeSearchFilter.cs" />
     <Compile Include="Models\Movies\MoviesSearchFilter.cs" />
     <Compile Include="Models\Movies\MoviesWithDetail.cs" />

@@ -12,9 +12,11 @@ namespace Cinema.Api.Business.Interfaces
     public interface IMoviesService
     {
         PaginatedList<MoviesWithDetail> GetAllPaginatedWithDetailBySearchFilter(MoviesSearchFilter searchFilter);
-         List<MoviesWithDetail> GetAllWithDetail();
+        List<MoviesWithDetail> GetAllWithDetail();
+        Movies GetById(int id);
         int Add(Movies record);
         int Update(Movies record);
+        int Delete(Movies record);
 
     }
 }

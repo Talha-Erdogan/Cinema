@@ -14,6 +14,7 @@ namespace Cinema.Api.Business.Interfaces
     {
         PaginatedList<MoviesType> GetAllPaginatedBySearchFilter(MoviesTypeSearchFilter searchFilter);
         List<MoviesType> GetAll();
+        MoviesType GetById(int id);
         int Add(MoviesType record);
         int Update(MoviesType record);
         int Delete(MoviesType record);

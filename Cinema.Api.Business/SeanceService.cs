@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Dynamic;
+using Cinema.Api.Business.Interfaces;
 
 namespace Cinema.Api.Business
 {
-    public class SeanceService
+    public class SeanceService: ISeanceService
     {
         public PaginatedList<Seance> GetAllPaginatedBySearchFilter(SeanceSearchFilter searchFilter)
         {
@@ -96,6 +97,18 @@ namespace Cinema.Api.Business
             }
 
             return resultList;
+        }
+
+        public Seance GetById(int id)
+        {
+            Seance result = new Seance();
+
+            using (AppDbContext dbContext = new AppDbContext())
+            {
+                result = dbContext.Seance.Where(r => r.Id == id && r.IsDeleted == false).AsNoTracking().SingleOrDefault();
+            }
+
+            return result;
         }
 
         public int Add(Seance record)

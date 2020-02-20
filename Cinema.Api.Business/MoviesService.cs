@@ -128,6 +128,19 @@ namespace Cinema.Api.Business
             return resultList;
         }
 
+        public Movies GetById(int id)
+        {
+            Movies result = new Movies();
+
+            using (AppDbContext dbContext = new AppDbContext())
+            {
+                result = dbContext.Movies.Where(r => r.Id == id && r.IsDeleted == false).AsNoTracking().SingleOrDefault();
+
+            }
+
+            return result;
+        }
+
         public int Add(Movies record)
         {
             int result = 0;
