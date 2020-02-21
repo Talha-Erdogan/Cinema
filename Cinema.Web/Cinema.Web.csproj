@@ -133,9 +133,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Auth\AddViewModel.cs" />
     <Compile Include="Models\Auth\ListFilterViewModel.cs" />
     <Compile Include="Models\Auth\ListViewModel.cs" />
     <Compile Include="Models\ListBaseViewModel.cs" />
+    <Compile Include="Models\Profile\AddViewModel.cs" />
     <Compile Include="Models\Profile\ListFilterViewModel.cs" />
     <Compile Include="Models\Profile\ListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -314,6 +316,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\List.cshtml" />
     <Content Include="Views\Profile\List.cshtml" />
+    <Content Include="Views\Profile\Add.cshtml" />
+    <Content Include="Views\Profile\_PagingPartial.cshtml" />
+    <Content Include="Views\Profile\_ErrorNotExist.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

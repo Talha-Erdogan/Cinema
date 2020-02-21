@@ -1,0 +1,56 @@
+﻿
+@model Cinema.Web.Models.Profile.ListViewModel
+
+<ul class="pagination pagination-sm">
+    @if (Model.DataList.HasPreviousPage)
+    {
+        <li class="page-item">
+            <a class="page-link btn-info" href="javascript:void(0)" onclick="ClickPaging('@(Model.DataList.CurrentPage-1)','@Model.DataList.PageSize')"> Previous </a>
+        </li>
+    }
+
+    @for (int paginationIndex = Model.DataList.CurrentPage - 3; paginationIndex < Model.DataList.CurrentPage; paginationIndex++)
+    {
+        if (paginationIndex <= 0)
+        {
+            continue;
+        }
+
+        <li class="page-item">
+            <a class="page-link" href="javascript:void(0)" onclick="ClickPaging('@(paginationIndex)','@Model.DataList.PageSize')">@(paginationIndex)</a>
+        </li>
+    }
+
+    <li class="page-item active">
+        <a class="page-link" href="javascript:void(0)" onclick="ClickPaging('@(Model.DataList.CurrentPage)','@Model.DataList.PageSize')">@(Model.DataList.CurrentPage)</a>
+    </li>
+
+    @for (int paginationIndex = Model.DataList.CurrentPage + 1; paginationIndex < Model.DataList.TotalPages + 1; paginationIndex++)
+    {
+        if (paginationIndex > Model.DataList.TotalPages || paginationIndex > (Model.DataList.CurrentPage + 3))
+        {
+            break;
+        }
+
+        <li class="page-item">
+            <a class="page-link" href="javascript:void(0)" onclick="ClickPaging('@(paginationIndex)','@Model.DataList.PageSize')">@(paginationIndex)</a>
+        </li>
+    }
+
+    @if (Model.DataList.HasNextPage)
+    {
+        <li class="page-item">
+            <a class="page-link btn-info" href="javascript:void(0)" onclick="ClickPaging('@(Model.DataList.CurrentPage+1)','@Model.DataList.PageSize')">Next</a>
+        </li>
+    }
+
+    <li class="page-item">
+        <span class="small">&nbsp;CurrentSize</span> @Html.TextBox("txtCurrentPage", "", new { @class = "form-control form-control-sm d-inline-block onlyNumberEntry", @id = "txtCurrentPage", @style = "width:60px; height:calc(1.5em + 0.5rem - 2px); " })
+    </li>
+
+    <li class="page-item">
+        <span class="small">&nbsp; Total Pages: @Model.DataList.TotalPages </span>
+    </li>
+
+</ul>
+

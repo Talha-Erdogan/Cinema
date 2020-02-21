@@ -105,6 +105,7 @@ namespace Cinema.Api.Controllers
             {
                 var record = new Profile();
                 record.Name = requestModel.Name;
+                record.Code = requestModel.Code;
                 record.IsDeleted = false;
                 var dbResult = _profileService.Add(record);
                 if (dbResult > 0)
@@ -136,6 +137,7 @@ namespace Cinema.Api.Controllers
             {
                 var record = _profileService.GetById(requestModel.Id);
                 record.Name = requestModel.Name;
+                record.Code = requestModel.Code;
                 var dbResult = _profileService.Update(record);
                 if (dbResult > 0)
                 {
