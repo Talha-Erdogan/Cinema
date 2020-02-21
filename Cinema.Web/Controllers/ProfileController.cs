@@ -1,10 +1,8 @@
 ﻿using Cinema.Web.Business;
-using Cinema.Web.Business.Common.Session;
 using Cinema.Web.Business.Enums;
 using Cinema.Web.Business.Interfaces;
-using Cinema.Web.Business.Models;
-using Cinema.Web.Business.Models.Auth;
-using Cinema.Web.Models.Auth;
+using Cinema.Web.Business.Models.Profile;
+using Cinema.Web.Models.Profile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +11,12 @@ using System.Web.Mvc;
 
 namespace Cinema.Web.Controllers
 {
-    public class AuthController : Controller
+    public class ProfileController : Controller
     {
-
-        private readonly IAuthService _authService;
-        public AuthController()
+        private readonly IProfileService _profileService;
+        public ProfileController()
         {
-            _authService = new AuthService();
+            _profileService = new ProfileService();
         }
 
         public ActionResult List()
@@ -40,11 +37,11 @@ namespace Cinema.Web.Controllers
             {
                 model.PageSize = 10;
             }
-            AuthSearchFilter searchFilter = new AuthSearchFilter();
+            ProfileSearchFilter searchFilter = new ProfileSearchFilter();
             searchFilter.CurrentPage = model.CurrentPage.HasValue ? model.CurrentPage.Value : 1;
             searchFilter.PageSize = model.PageSize.HasValue ? model.PageSize.Value : 10;
-            
-            var apiResponseModel = _authService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter);//todo:token
+
+            var apiResponseModel = _profileService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter); //todo:token
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 model.DataList = apiResponseModel.Data;
@@ -52,7 +49,7 @@ namespace Cinema.Web.Controllers
             else
             {
                 ViewBag.ErrorMessage = apiResponseModel.ResultStatusMessage;
-                model.DataList = new Business.Models.PaginatedList<Auth>(new List<Auth>(), 0, model.CurrentPage.Value, model.PageSize.Value, model.SortOn, model.SortDirection);
+                model.DataList = new Business.Models.PaginatedList<Profile>(new List<Profile>(), 0, model.CurrentPage.Value, model.PageSize.Value, model.SortOn, model.SortDirection);
                 return View(model);
             }
             // select lists
@@ -79,7 +76,7 @@ namespace Cinema.Web.Controllers
                 model.PageSize = 10;
             }
 
-            AuthSearchFilter searchFilter = new AuthSearchFilter();
+            ProfileSearchFilter searchFilter = new ProfileSearchFilter();
             searchFilter.CurrentPage = model.CurrentPage.HasValue ? model.CurrentPage.Value : 1;
             searchFilter.PageSize = model.PageSize.HasValue ? model.PageSize.Value : 10;
             searchFilter.SortOn = model.SortOn;
@@ -87,7 +84,7 @@ namespace Cinema.Web.Controllers
             searchFilter.Filter_Code = model.Filter.Filter_Code;
             searchFilter.Filter_Name = model.Filter.Filter_Name;
 
-            var apiResponseModel = _authService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter);//todo:token
+            var apiResponseModel = _profileService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter);//todo:token
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 model.DataList = apiResponseModel.Data;
@@ -95,13 +92,14 @@ namespace Cinema.Web.Controllers
             else
             {
                 ViewBag.ErrorMessage = apiResponseModel.ResultStatusMessage;
-                model.DataList = new Business.Models.PaginatedList<Auth>(new List<Auth>(), 0, model.CurrentPage.Value, model.PageSize.Value, model.SortOn, model.SortDirection);
+                model.DataList = new Business.Models.PaginatedList<Profile>(new List<Profile>(), 0, model.CurrentPage.Value, model.PageSize.Value, model.SortOn, model.SortDirection);
                 return View(model);
             }
 
             // select lists
             return View(model);
         }
+
 
     }
 }

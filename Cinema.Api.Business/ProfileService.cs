@@ -21,15 +21,7 @@ namespace Cinema.Api.Business
 
             using (AppDbContext dbContext = new AppDbContext())
             {
-                var query = from a in dbContext.Profile
-                            where a.IsDeleted == false
-                            select new Profile()
-                            {
-                                Id = a.Id,
-                                Name = a.Name,
-                                Code = a.Code,
-                                IsDeleted = a.IsDeleted,
-                            };
+                var query = dbContext.Profile.Where(p => p.IsDeleted == false).AsNoTracking();
 
                 // filtering
                 if (!string.IsNullOrEmpty(searchFilter.Filter_Name))
@@ -84,15 +76,7 @@ namespace Cinema.Api.Business
 
             using (AppDbContext dbContext = new AppDbContext())
             {
-                var query = from a in dbContext.Profile
-                            where a.IsDeleted == false
-                            select new Profile()
-                            {
-                                Id = a.Id,
-                                Name = a.Name,
-                                Code = a.Code,
-                                IsDeleted = a.IsDeleted,
-                            };
+                var query = dbContext.Profile.Where(p => p.IsDeleted == false).AsNoTracking();
                 resultList = query.ToList();
             }
 

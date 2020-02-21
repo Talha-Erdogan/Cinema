@@ -10,6 +10,11 @@ namespace Cinema.Web.Business.Interfaces
 {
     public interface IProfileService
     {
+        ApiResponseModel<PaginatedList<Profile>> GetAllPaginatedWithDetailBySearchFilter(string userToken, ProfileSearchFilter searchFilter);
+        ApiResponseModel<List<Profile>> GetAll(string userToken);
         ApiResponseModel<Profile> GetById(string userToken, int id);
+        ApiResponseModel<Profile> Add(string userToken, Profile profile);
+        ApiResponseModel<Profile> Edit(string userToken, Profile profile);
+        ApiResponseModel<Profile> Delete(string userToken, int profileId);
     }
 }

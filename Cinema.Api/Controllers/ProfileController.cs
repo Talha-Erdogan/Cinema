@@ -62,6 +62,7 @@ namespace Cinema.Api.Controllers
                 searchFilter.SortOn = requestModel.SortOn;
                 searchFilter.SortDirection = requestModel.SortDirection;
                 searchFilter.Filter_Name = requestModel.Filter.Filter_Name;
+                searchFilter.Filter_Code = requestModel.Filter.Filter_Code;
                 responseModel.Data = _profileService.GetAllPaginatedBySearchFilter(searchFilter);
                 responseModel.ResultStatusCode = ResultStatusCodeStatic.Success;
                 responseModel.ResultStatusMessage = "Success";

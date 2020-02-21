@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Cinema.Web.Business.Models.Profile
 {
-    public class Profile
+    public class AddRequestModel : BaseRequestModel
     {
         public int Id { get; set; }
-        public string Code { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
         public bool IsDeleted { get; set; }
     }
 }
