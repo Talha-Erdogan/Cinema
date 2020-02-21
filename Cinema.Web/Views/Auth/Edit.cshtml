@@ -1,0 +1,72 @@
+﻿@model Cinema.Web.Models.Auth.AddViewModel
+
+@{
+    ViewData["Title"] = "Auth Edit";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong> Auth Edit </strong>
+            </div>
+            <div class="card-body">
+
+                @using (Html.BeginForm("Edit", "Auth", FormMethod.Post, new { @class = "form-horizontal input-sm" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label"> Code</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.Code, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.Code, null, new { @class = "help-block text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label"> Name</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <button class="btn btn-sm btn-primary" type="submit" id="btnSubmit" name="SubmitType" value="Edit">
+                                <i class="fa fa-dot-circle-o"></i> Edit
+                            </button>
+                            &nbsp;
+
+                            <a class="btn btn-sm btn-danger" href="~/Auth/List">
+                                <i class="fa fa-ban"></i> Cancel
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            @if (ViewBag.ErrorMessage != null && !string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                            {
+                                <div class="text-danger">
+                                    @ViewBag.ErrorMessage
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.col-->
+</div>
+
+

@@ -132,6 +132,7 @@ namespace Cinema.Api.Controllers
             {
                 var record = new Auth();
                 record.Name = requestModel.Name;
+                record.Code = requestModel.Code;
                 record.IsDeleted = false;
                 var dbResult = _authService.Add(record);
                 if (dbResult > 0)
@@ -163,6 +164,7 @@ namespace Cinema.Api.Controllers
             {
                 var record = _authService.GetById(requestModel.Id);
                 record.Name = requestModel.Name;
+                record.Code = requestModel.Code;
                 var dbResult = _authService.Update(record);
                 if (dbResult > 0)
                 {

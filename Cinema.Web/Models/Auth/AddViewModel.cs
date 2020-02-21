@@ -8,6 +8,7 @@ namespace Cinema.Web.Models.Auth
 {
     public class AddViewModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "Code is required.")]
         public string Code { get; set; }
 

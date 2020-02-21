@@ -320,6 +320,10 @@
     <Content Include="Views\Profile\_PagingPartial.cshtml" />
     <Content Include="Views\Profile\_ErrorNotExist.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Auth\_PagingPartial.cshtml" />
+    <Content Include="Views\Auth\_ErrorNotExist.cshtml" />
+    <Content Include="Views\Auth\Add.cshtml" />
+    <Content Include="Views\Auth\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
