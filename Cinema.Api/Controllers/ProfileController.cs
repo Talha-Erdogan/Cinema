@@ -14,6 +14,7 @@ using System.Web.Http;
 
 namespace Cinema.Api.Controllers
 {
+    [RoutePrefix("api/Profile")]
     public class ProfileController : ApiController
     {
         private readonly IProfileService _profileService;

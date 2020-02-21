@@ -240,7 +240,7 @@ namespace Cinema.Api.Controllers
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                Password = user.Password,
+               // Password = user.Password,//apiden password dönülmemeli
                 Name = user.Name,
                 Surname = user.Surname,
                 Mail = user.Mail,

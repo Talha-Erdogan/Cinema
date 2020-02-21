@@ -14,6 +14,7 @@ using System.Web.Http;
 
 namespace Cinema.Api.Controllers
 {
+    [RoutePrefix("api/Auth")]
     public class AuthController : ApiController
     {
         private readonly IAuthService _authService;
@@ -64,6 +65,7 @@ namespace Cinema.Api.Controllers
                 searchFilter.SortOn = requestModel.SortOn;
                 searchFilter.SortDirection = requestModel.SortDirection;
                 searchFilter.Filter_Name = requestModel.Filter.Filter_Name;
+                searchFilter.Filter_Code = requestModel.Filter.Filter_Code;
                 responseModel.Data = _authService.GetAllPaginatedBySearchFilter(searchFilter);
                 responseModel.ResultStatusCode = ResultStatusCodeStatic.Success;
                 responseModel.ResultStatusMessage = "Success";

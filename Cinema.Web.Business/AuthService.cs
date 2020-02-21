@@ -9,10 +9,11 @@ using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
 using System.Text;
 using System.Threading.Tasks;
+using Cinema.Web.Business.Interfaces;
 
 namespace Cinema.Web.Business
 {
-    public class AuthService
+    public class AuthService: IAuthService
     {
 
         public ApiResponseModel<PaginatedList<Auth>> GetAllPaginatedWithDetailBySearchFilter(string userToken, AuthSearchFilter searchFilter)
