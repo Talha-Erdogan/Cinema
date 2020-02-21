@@ -167,6 +167,7 @@
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\MoviesTypeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ProfileDetailController.cs" />
     <Compile Include="Controllers\SalonController.cs" />
     <Compile Include="Controllers\SeanceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -197,6 +198,12 @@
     <Compile Include="Models\Movies\GetAllRequestModel.cs" />
     <Compile Include="Models\Movies\GetByIdRequestModel.cs" />
     <Compile Include="Models\Movies\ListFilterRequestModel.cs" />
+    <Compile Include="Models\ProfileDetail\AddRequestModel.cs" />
+    <Compile Include="Models\ProfileDetail\DeleteByProfileIdAndAuthIdRequestModel.cs" />
+    <Compile Include="Models\ProfileDetail\GetAllAuthByProfileIdRequestModel.cs" />
+    <Compile Include="Models\ProfileDetail\GetAllAuthByProfileIdWhichIsNotIncludedRequestModel.cs" />
+    <Compile Include="Models\ProfileDetail\GetByIdRequestModel.cs" />
+    <Compile Include="Models\ProfileDetail\GetByProfileIdAndAuthIdRequestModel.cs" />
     <Compile Include="Models\Profile\AddRequestModel.cs" />
     <Compile Include="Models\Profile\DeleteRequestModel.cs" />
     <Compile Include="Models\Profile\GetAllPaginatedRequestModel.cs" />

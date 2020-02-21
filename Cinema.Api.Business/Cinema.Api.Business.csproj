@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IMoviesService.cs" />
     <Compile Include="Interfaces\IMoviesTypeService.cs" />
+    <Compile Include="Interfaces\IProfileDetailService.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
     <Compile Include="Interfaces\ISalonService.cs" />
     <Compile Include="Interfaces\ISeanceService.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="Models\Movies\MoviesSearchFilter.cs" />
     <Compile Include="Models\Movies\MoviesWithDetail.cs" />
     <Compile Include="Models\PaginatedList.cs" />
+    <Compile Include="Models\ProfileDetail\ProfileDetailSearchFilter.cs" />
+    <Compile Include="Models\ProfileDetail\ProfileDetailWithDetail.cs" />
     <Compile Include="Models\Profile\ProfileSearchFilter.cs" />
     <Compile Include="Models\Salon\SalonSearchFilter.cs" />
     <Compile Include="Models\Seance\SeanceSearchFilter.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Models\User\UserWithDetail.cs" />
     <Compile Include="MoviesService.cs" />
     <Compile Include="MoviesTypeService.cs" />
+    <Compile Include="ProfileDetailService.cs" />
     <Compile Include="ProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalonService.cs" />
