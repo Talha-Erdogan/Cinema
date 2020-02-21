@@ -13,6 +13,7 @@ namespace Cinema.Api.Business.Interfaces
     {
         PaginatedList<Auth> GetAllPaginatedBySearchFilter(AuthSearchFilter searchFilter);
         List<Auth> GetAll();
+        List<Auth> GetAllByProfileId(int profileId);
         Auth GetById(int id);
         int Add(Auth record);
         int Update(Auth record);

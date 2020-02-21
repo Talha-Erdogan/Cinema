@@ -99,6 +99,26 @@ namespace Cinema.Api.Business
             return resultList;
         }
 
+        public List<Auth> GetAllByProfileId(int profileId)
+        {
+            List<Auth> resultList = new List<Auth>();
+
+            using (AppDbContext dbContext = new AppDbContext())
+            {
+                var query = from pd in dbContext.ProfileDetail
+                            join p in dbContext.Profile on pd.ProfileId equals p.Id
+                            join a in dbContext.Auth on pd.AuthId equals a.Id
+                            where
+                                pd.ProfileId == profileId && a.IsDeleted == false && p.IsDeleted == false
+                            select a;
+
+                // as no tracking
+                query = query.AsNoTracking();
+                resultList.AddRange(query.ToList());
+            }
+            return resultList;
+        }
+
         public Auth GetById(int id)
         {
             Auth result = new Auth();

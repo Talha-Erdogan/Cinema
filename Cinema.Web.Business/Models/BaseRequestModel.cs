@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cinema.Web.Business
+namespace Cinema.Web.Business.Models
 {
-    public class Class1
+    public class BaseRequestModel
     {
+        public string UserToken { get; set; }
     }
 }

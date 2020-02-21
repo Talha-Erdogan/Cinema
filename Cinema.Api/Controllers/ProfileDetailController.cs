@@ -195,7 +195,7 @@ namespace Cinema.Api.Controllers
             {
                 responseModel.Data = _profileDetailService.DeleteByProfileIdAndAuthId(requestModel.ProfileId, requestModel.AuthId);
                 responseModel.ResultStatusCode = ResultStatusCodeStatic.Success;
-                responseModel.ResultStatusMessage = "Success");
+                responseModel.ResultStatusMessage = "Success";
             }
             catch (Exception ex)
             {

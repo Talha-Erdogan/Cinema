@@ -178,6 +178,7 @@
     <Compile Include="Models\ApiResponseModel.cs" />
     <Compile Include="Models\Auth\AddRequestModel.cs" />
     <Compile Include="Models\Auth\DeleteRequestModel.cs" />
+    <Compile Include="Models\Auth\GetAllByCurrentUserRequestModel.cs" />
     <Compile Include="Models\Auth\GetAllPaginatedRequestModel.cs" />
     <Compile Include="Models\Auth\GetAllRequestModel.cs" />
     <Compile Include="Models\Auth\GetByIdRequestModel.cs" />

@@ -17,10 +17,12 @@ namespace Cinema.Api.Controllers
     public class AuthController : ApiController
     {
         private readonly IAuthService _authService;
+        private readonly IUserTokenService _userTokenService;
 
         public AuthController()
         {
             _authService = new AuthService();
+            _userTokenService = new UserTokenService();
         }
 
 
@@ -74,6 +76,30 @@ namespace Cinema.Api.Controllers
 
             return responseModel;
         }
+
+        [Route("GetAllByCurrentUser")]
+        [HttpPost]
+        public ApiResponseModel<List<Data.Entity.Auth>> GetAllByCurrentUser([FromBody]GetAllByCurrentUserRequestModel requestModel)
+        {
+            var responseModel = new ApiResponseModel<List<Data.Entity.Auth>>();
+
+            try
+            {
+                // token bilgisinde ilgili user'ın profileid bilgisi elde edilir
+                var userProfileId = _userTokenService.GetByToken(requestModel.UserToken).ProfileId;
+
+                responseModel.Data = _authService.GetAllByProfileId(userProfileId);
+                responseModel.ResultStatusCode = ResultStatusCodeStatic.Success;
+                responseModel.ResultStatusMessage = "Success";
+            }
+            catch (Exception ex)
+            {
+                responseModel.ResultStatusCode = ResultStatusCodeStatic.Error;
+                responseModel.ResultStatusMessage = ex.Message;
+            }
+            return responseModel;
+        }
+
 
         [Route("GetById")]
         [HttpPost]
