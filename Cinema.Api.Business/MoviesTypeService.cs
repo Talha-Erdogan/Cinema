@@ -22,14 +22,7 @@ namespace Cinema.Api.Business
             using (AppDbContext dbContext = new AppDbContext())
             {
 
-                var query = from mt in dbContext.MoviesType.Where(mt => mt.IsDeleted == false)
-                            where mt.IsDeleted == false
-                            select new MoviesType()
-                            {
-                                Id = mt.Id,
-                                Name = mt.Name,
-                                IsDeleted = mt.IsDeleted,
-                            };
+                var query = dbContext.MoviesType.Where(mt => mt.IsDeleted == false).AsNoTracking();
 
                 // filtering
                 if (!string.IsNullOrEmpty(searchFilter.Filter_Name))
@@ -77,14 +70,7 @@ namespace Cinema.Api.Business
 
             using (AppDbContext dbContext = new AppDbContext())
             {
-                var query = from mt in dbContext.MoviesType.Where(mt => mt.IsDeleted == false)
-                            where mt.IsDeleted == false
-                            select new MoviesType()
-                            {
-                                Id = mt.Id,
-                                Name = mt.Name,
-                                IsDeleted = mt.IsDeleted,
-                            };
+                var query = dbContext.MoviesType.Where(mt => mt.IsDeleted == false).AsNoTracking();
                 resultList = query.ToList();
             }
 

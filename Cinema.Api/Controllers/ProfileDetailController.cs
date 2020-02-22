@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace Cinema.Api.Controllers
 {
-    [RoutePrefix("api/ProfileDetail")]
+    [RoutePrefix("api/ProfileDetail")] 
     public class ProfileDetailController : ApiController
     {
         private readonly IProfileDetailService _profileDetailService;

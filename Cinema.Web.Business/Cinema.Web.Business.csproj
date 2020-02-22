@@ -101,6 +101,7 @@
     <Compile Include="Common\Session\SessionUser.cs" />
     <Compile Include="Enums\ResultStatusCodeStatic.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
+    <Compile Include="Interfaces\IMoviesTypeService.cs" />
     <Compile Include="Interfaces\IProfileDetailService.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
@@ -117,6 +118,14 @@
     <Compile Include="Models\BaseRequestModel.cs" />
     <Compile Include="Models\BaseResponseModel.cs" />
     <Compile Include="Models\ListBaseRequestModel.cs" />
+    <Compile Include="Models\MoviesType\AddRequestModel.cs" />
+    <Compile Include="Models\MoviesType\DeleteRequestModel.cs" />
+    <Compile Include="Models\MoviesType\GetAllPaginatedRequestModel.cs" />
+    <Compile Include="Models\MoviesType\GetAllRequestModel.cs" />
+    <Compile Include="Models\MoviesType\GetByIdRequestModel.cs" />
+    <Compile Include="Models\MoviesType\ListFilterRequestModel.cs" />
+    <Compile Include="Models\MoviesType\MoviesType.cs" />
+    <Compile Include="Models\MoviesType\MoviesTypeSearchFilter.cs" />
     <Compile Include="Models\PaginatedList.cs" />
     <Compile Include="Models\ProfileDetail\AddRequestModel.cs" />
     <Compile Include="Models\ProfileDetail\DeleteByProfileIdAndAuthIdRequestModel.cs" />
@@ -134,6 +143,7 @@
     <Compile Include="Models\User\LoginResponseModel.cs" />
     <Compile Include="Models\User\LogoutRequestModel.cs" />
     <Compile Include="Models\User\User.cs" />
+    <Compile Include="MoviesTypeService.cs" />
     <Compile Include="ProfileDetailService.cs" />
     <Compile Include="ProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
