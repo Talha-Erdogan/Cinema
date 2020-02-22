@@ -130,6 +130,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ProfileDetailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -137,6 +138,8 @@
     <Compile Include="Models\Auth\ListFilterViewModel.cs" />
     <Compile Include="Models\Auth\ListViewModel.cs" />
     <Compile Include="Models\ListBaseViewModel.cs" />
+    <Compile Include="Models\ProfileDetail\AuthCheckViewModel.cs" />
+    <Compile Include="Models\ProfileDetail\BatchEditViewModel.cs" />
     <Compile Include="Models\Profile\AddViewModel.cs" />
     <Compile Include="Models\Profile\ListFilterViewModel.cs" />
     <Compile Include="Models\Profile\ListViewModel.cs" />
@@ -324,6 +327,8 @@
     <Content Include="Views\Auth\_ErrorNotExist.cshtml" />
     <Content Include="Views\Auth\Add.cshtml" />
     <Content Include="Views\Auth\Edit.cshtml" />
+    <Content Include="Views\ProfileDetail\_ErrorNotExistProfile.cshtml" />
+    <Content Include="Views\ProfileDetail\BatchEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

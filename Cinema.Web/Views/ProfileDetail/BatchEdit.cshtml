@@ -1,0 +1,139 @@
+﻿@model Cinema.Web.Models.ProfileDetail.BatchEditViewModel
+@{
+    ViewData["Title"] = "Batch Edit";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Batch Edit
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="form-group row">
+                            <div class="col-md-3"></div>
+                            <label class="col-md-2 col-form-label">Profile</label>
+                            <div class="col-md-4" id="dvProfileCombobox">
+                                @Html.DropDownListFor(m => m.ProfileId, Model.ProfileSelectList, "Select", new
+                                {
+                                    @class = "form-control form-control-sm",
+                                    @id = "cbProfile"
+                                })
+                                @Html.ValidationMessageFor(m => m.ProfileId, null, new { @class = "help-block text-danger" })
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+
+
+                @using (Html.BeginForm("BatchEdit", "ProfileDetail", FormMethod.Post, new { @class = "form-horizontal input-sm" }))
+                {
+                    @Html.HiddenFor(m => m.ProfileId)
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <label>Undefined Authorizations</label>
+                            <div style="height:330px; overflow-y: scroll;margin-bottom:2px;">
+                                <table class="table table-responsive-sm table-bordered table-striped table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th> * </th>
+                                            <th> Name</th>
+                                            <th> Code </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (var i = 0; i < Model.AuthWhichIsNotIncludeList.Count(); i++)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @Html.CheckBoxFor(it => it.AuthWhichIsNotIncludeList[i].Checked)
+                                                </td>
+                                                <td>
+                                                    @Html.HiddenFor(it => it.AuthWhichIsNotIncludeList[i].Id)
+                                                    @Html.DisplayFor(it => it.AuthWhichIsNotIncludeList[i].Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(it => it.AuthWhichIsNotIncludeList[i].Code)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-primary" type="submit" id="btnSubmit" name="SubmitType" value="Add">
+                                    <i class="fa fa-dot-circle-o"></i> Add
+                                </button>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="">
+                            <label>Defined Authorizations</label>
+                            <div style="height:330px; overflow-y: scroll;margin-bottom:2px;">
+                                <table class="table table-responsive-sm table-bordered table-striped table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th> * </th>
+                                            <th> Name </th>
+                                            <th> Code </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (var i = 0; i < Model.AuthList.Count(); i++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.CheckBoxFor(it => it.AuthList[i].Checked)
+                                                </td>
+                                                <td>
+                                                    @Html.HiddenFor(it => it.AuthList[i].Id)
+                                                    @Html.DisplayFor(it => it.AuthList[i].Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(it => it.AuthList[i].Code)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-danger" type="submit" id="btnSubmit" name="SubmitType" value="Delete">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @if (ViewBag.ErrorMessage != null && !string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                        {
+                            <div class="text-danger">
+                                @ViewBag.ErrorMessage
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            $('#cbProfile').change(function () {
+                if ($('#cbProfile').val() != '') {
+                    window.location.href = "/ProfileDetail/BatchEdit?profileId=" + $('#cbProfile').val();
+                }
+                else {
+                    window.location.href = "/ProfileDetail/BatchEdit";
+                }
+            });
+        </script>
+    }
