@@ -134,6 +134,7 @@
     <Compile Include="Controllers\ProfileDetailController.cs" />
     <Compile Include="Controllers\SalonController.cs" />
     <Compile Include="Controllers\SeanceController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,6 +156,9 @@
     <Compile Include="Models\Seance\AddViewModel.cs" />
     <Compile Include="Models\Seance\ListFilterViewModel.cs" />
     <Compile Include="Models\Seance\ListViewModel.cs" />
+    <Compile Include="Models\User\AddViewModel.cs" />
+    <Compile Include="Models\User\ListFilterViewModel.cs" />
+    <Compile Include="Models\User\ListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -356,6 +360,11 @@
     <Content Include="Views\Seance\Edit.cshtml" />
     <Content Include="Views\Seance\_PagingPartial.cshtml" />
     <Content Include="Views\Seance\_ErrorNotExist.cshtml" />
+    <Content Include="Views\User\_ErrorNotExist.cshtml" />
+    <Content Include="Views\User\_PagingPartial.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
+    <Content Include="Views\User\Add.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

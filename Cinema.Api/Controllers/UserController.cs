@@ -114,6 +114,7 @@ namespace Cinema.Api.Controllers
                 var record = new User();
                 record.UserName = requestModel.UserName;
                 record.Name = requestModel.Name;
+                record.Password = requestModel.Password;
                 record.Surname = requestModel.Surname;
                 record.Mail = requestModel.Mail;
                 record.ProfileId = requestModel.ProfileId;
@@ -150,6 +151,7 @@ namespace Cinema.Api.Controllers
                 var record = _userService.GetById(requestModel.Id);
                 record.UserName = requestModel.UserName;
                 record.Name = requestModel.Name;
+                record.Password = requestModel.Password;
                 record.Surname = requestModel.Surname;
                 record.Mail = requestModel.Mail;
                 record.ProfileId = requestModel.ProfileId;

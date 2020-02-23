@@ -1,0 +1,159 @@
+﻿@using Cinema.Web.Controllers
+@model Cinema.Web.Models.User.ListViewModel
+@{
+    ViewData["Title"] = "User List";
+}
+
+<div class="card mb-4 wow fadeIn">
+    <div class="card-header">
+        <i class="fa fa-align-justify"></i> User List - <a class="btn btn-sm btn-primary" href="~/User/Add">Add</a>
+    </div>
+</div>
+
+<div class="row wow fadeIn">
+
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        @using (Html.BeginForm("List", "User", FormMethod.Post, new { @class = "form-horizontal input-sm", @id = "filterForm" }))
+                        {
+                            <!-- form get'te submit yapilirken page bilgisi tutulmasi icin -->
+                            @Html.HiddenFor(m => m.PageSize, new { @id = "hiddenPageSize" });
+                            @Html.HiddenFor(m => m.CurrentPage, new { @id = "hiddenCurrentPage" });
+                            @Html.HiddenFor(m => m.SortOn)
+                            @Html.HiddenFor(m => m.SortDirection)
+
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Name </label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.Filter.Filter_Name, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.Filter.Filter_Name, null, new { @class = "help-block text-danger" })
+                                </div>
+                                <label class="col-md-2 col-form-label">Surname </label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.Filter.Filter_Surname, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.Filter.Filter_Surname, null, new { @class = "help-block text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Profile</label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(m => m.Filter.Filter_ProfileId, Model.ProfileSelectList, "Select", new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.Filter.Filter_ProfileId, null, new { @class = "help-block text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-sm btn-primary" type="submit" name="SubmitType" value="List">
+                                        <i class="fa fa-search"></i> List
+                                    </button>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="text-left small mb-3" style="vertical-align: middle;">
+                    Total Record Count: @Model.DataList.TotalCount Displaying Records: @Model.DataList.From - @Model.DataList.To
+                    <div class="float-right">
+                        <span>PageSize :</span> @Html.TextBox("txtPageSize", "", new { @class = "form-control form-control-sm d-inline-block onlyNumberEntry", @id = "txtPageSize", @style = " width:50px; height:calc(1.5em + 0.5rem - 2px);" })
+                    </div>
+                </div>
+
+                <div style="overflow-x:auto; overflow-y:auto;">
+
+                    <table id="tableName" class="table table-striped table-hover table-sm table-borderless table-responsive-sm table-bordered table-info">
+                        <thead>
+                            <tr>
+                                <th style="width:210px;"> </th>
+                                <th>UserName</th>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Mail</th>
+                                <th>Profile Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DataList.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-sm btn-info" href="~/User/Edit/@item.Id">Edit</a>
+                                        <a class="btn btn-sm btn-warning" href="~/User/Delete/@item.Id">Delete</a>
+                                    </td>
+                                    <td>@item.UserName</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Surname</td>
+                                    <td>@item.Mail</td>
+                                    <td>@item.Profile_Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <nav>
+                    @Html.Partial("_PagingPartial", Model)
+                </nav>
+
+                @if (ViewBag.ErrorMessage != null && !string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="text-danger">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <!-- pagesize ve current page js  -->
+    <script>
+        $(document).ready(function(){
+            $('#txtPageSize').keyup(function () {
+                $('#hiddenPageSize').val($('#txtPageSize').val());
+            });
+
+            $('#txtPageSize').val(@((Model.PageSize)));
+
+            $('#txtCurrentPage').keyup(function () {
+                $('#hiddenCurrentPage').val($('#txtCurrentPage').val());
+            });
+
+            $('#txtCurrentPage').val(@((Model.CurrentPage)));
+
+            $(".onlyNumberEntry").keypress(function (e) {
+                if (e.which == 13) {
+                    $('#filterForm').submit();
+                }
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                return false;
+                }
+            });
+        }); // end of $(document).ready
+
+
+        function ClickSorting(sortOn, sortDirection) {
+            $('#hiddenSortOn').val(sortOn);
+            $('#hiddenSortDirection').val(sortDirection);
+            $('#filterForm').submit();
+        }
+
+        function ClickPaging(currentPage, pageSize) {
+            $('#hiddenCurrentPage').val(currentPage);
+            $('#hiddenPageSize').val(pageSize);
+            $('#filterForm').submit();
+        }
+    </script>
+
+}
