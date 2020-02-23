@@ -22,14 +22,7 @@ namespace Cinema.Api.Business
             using (AppDbContext dbContext = new AppDbContext())
             {
 
-                var query = from sa in dbContext.Salon.Where(sa=> sa.IsDeleted == false)
-                            where sa.IsDeleted == false
-                            select new Salon()
-                            {
-                                Id = sa.Id,
-                                Name = sa.Name,
-                                IsDeleted = sa.IsDeleted,
-                            };
+                var query = dbContext.Salon.Where(s => s.IsDeleted == false).AsNoTracking();
 
                 // filtering
 
@@ -77,21 +70,11 @@ namespace Cinema.Api.Business
         public List<Salon> GetAll()
         {
             List<Salon> resultList = new List<Salon>();
-
             using (AppDbContext dbContext = new AppDbContext())
             {
-                var query = from sa in dbContext.Salon.Where(sa => sa.IsDeleted == false)
-                            where sa.IsDeleted == false
-                            select new Salon()
-                            {
-                                Id = sa.Id,
-                                Name = sa.Name,
-                                IsDeleted = sa.IsDeleted,
-                            };
+                var query = dbContext.Salon.Where(s => s.IsDeleted == false).AsNoTracking();
                 resultList = query.ToList();
-
             }
-
             return resultList;
         }
 

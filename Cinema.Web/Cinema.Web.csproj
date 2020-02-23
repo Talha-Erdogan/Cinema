@@ -132,6 +132,7 @@
     <Compile Include="Controllers\MoviesTypeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ProfileDetailController.cs" />
+    <Compile Include="Controllers\SalonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,6 +148,9 @@
     <Compile Include="Models\Profile\AddViewModel.cs" />
     <Compile Include="Models\Profile\ListFilterViewModel.cs" />
     <Compile Include="Models\Profile\ListViewModel.cs" />
+    <Compile Include="Models\Salon\AddViewModel.cs" />
+    <Compile Include="Models\Salon\ListFilterViewModel.cs" />
+    <Compile Include="Models\Salon\ListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +342,11 @@
     <Content Include="Views\MoviesType\_ErrorNotExist.cshtml" />
     <Content Include="Views\MoviesType\Add.cshtml" />
     <Content Include="Views\MoviesType\Edit.cshtml" />
+    <Content Include="Views\Salon\List.cshtml" />
+    <Content Include="Views\Salon\_PagingPartial.cshtml" />
+    <Content Include="Views\Salon\_ErrorNotExist.cshtml" />
+    <Content Include="Views\Salon\Add.cshtml" />
+    <Content Include="Views\Salon\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

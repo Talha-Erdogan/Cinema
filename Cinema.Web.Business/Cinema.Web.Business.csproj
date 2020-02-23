@@ -104,6 +104,7 @@
     <Compile Include="Interfaces\IMoviesTypeService.cs" />
     <Compile Include="Interfaces\IProfileDetailService.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
+    <Compile Include="Interfaces\ISalonService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\ApiResponseModel.cs" />
     <Compile Include="Models\Auth\AddRequestModel.cs" />
@@ -139,6 +140,14 @@
     <Compile Include="Models\Profile\ListFilterRequestModel.cs" />
     <Compile Include="Models\Profile\Profile.cs" />
     <Compile Include="Models\Profile\ProfileSearchFilter.cs" />
+    <Compile Include="Models\Salon\AddRequestModel.cs" />
+    <Compile Include="Models\Salon\DeleteRequestModel.cs" />
+    <Compile Include="Models\Salon\GetAllPaginatedRequestModel.cs" />
+    <Compile Include="Models\Salon\GetAllRequestModel.cs" />
+    <Compile Include="Models\Salon\GetByIdRequestModel.cs" />
+    <Compile Include="Models\Salon\ListFilterRequestModel.cs" />
+    <Compile Include="Models\Salon\Salon.cs" />
+    <Compile Include="Models\Salon\SalonSearchFilter.cs" />
     <Compile Include="Models\User\LoginRequestModel.cs" />
     <Compile Include="Models\User\LoginResponseModel.cs" />
     <Compile Include="Models\User\LogoutRequestModel.cs" />
@@ -147,6 +156,7 @@
     <Compile Include="ProfileDetailService.cs" />
     <Compile Include="ProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalonService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
