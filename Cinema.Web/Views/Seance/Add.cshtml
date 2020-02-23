@@ -1,0 +1,69 @@
+﻿@model Cinema.Web.Models.Seance.AddViewModel
+@{
+    ViewData["Title"] = "Seance Add";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong> Add </strong>
+            </div>
+            <div class="card-body">
+
+                @using (Html.BeginForm("Add", "Seance", FormMethod.Post, new { @class = "form-horizontal input-sm" }))
+                {
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Name</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block text-danger" })
+                        </div>
+                        <label class="col-md-2 col-form-label">Date</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.Date, new { @class = "form-control input-sm", @type = "date" })
+                            @Html.ValidationMessageFor(m => m.Date, null, new { @class = "help-block text-danger" })
+                        </div>
+
+                        <label class="col-md-2 col-form-label">Time</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.Time, new { @class = "form-control input-sm", @type = "time" })
+                            @Html.ValidationMessageFor(m => m.Time, null, new { @class = "help-block text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <button class="btn btn-sm btn-primary" type="submit" id="btnSubmit">
+                                <i class="fa fa-dot-circle-o"></i> Save
+                            </button>
+                            &nbsp;
+                            <a class="btn btn-sm btn-danger" href="~/Seance/List">
+                                <i class="fa fa-ban"></i> Cancel
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            @if (ViewBag.ErrorMessage != null && !string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                            {
+                                <div class="text-danger">
+                                    @ViewBag.ErrorMessage
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.col-->
+</div>
+
+

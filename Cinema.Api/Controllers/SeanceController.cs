@@ -104,6 +104,8 @@ namespace Cinema.Api.Controllers
             {
                 var record = new Seance();
                 record.Name = requestModel.Name;
+                record.Date = requestModel.Date;
+                record.Time = requestModel.Time;
                 record.IsDeleted = false;
                 var dbResult = _seanceService.Add(record);
                 if (dbResult > 0)
@@ -135,6 +137,8 @@ namespace Cinema.Api.Controllers
             {
                 var record = _seanceService.GetById(requestModel.Id);
                 record.Name = requestModel.Name;
+                record.Date = requestModel.Date;
+                record.Time = requestModel.Time;
                 var dbResult = _seanceService.Update(record);
                 if (dbResult > 0)
                 {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Cinema.Web.Models.MoviesType
+namespace Cinema.Web.Models.Seance
 {
     public class AddViewModel
     {
@@ -12,5 +12,11 @@ namespace Cinema.Web.Models.MoviesType
 
         [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Date is required.")]
+        public DateTime? Date { get; set; }
+
+        [Required(ErrorMessage = "Time is required.")]
+        public string Time { get; set; }
     }
 }

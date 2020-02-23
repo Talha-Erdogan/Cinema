@@ -1,12 +1,12 @@
 ﻿@using Cinema.Web.Controllers
-@model Cinema.Web.Models.MoviesType.ListViewModel
+@model Cinema.Web.Models.Seance.ListViewModel
 @{
-    ViewData["Title"] = "Movies Type List";
+    ViewData["Title"] = "Seance List";
 }
 
 <div class="card mb-4 wow fadeIn">
     <div class="card-header">
-        <i class="fa fa-align-justify"></i> Movies Type List - <a class="btn btn-sm btn-primary" href="~/MoviesType/Add">Add</a>
+        <i class="fa fa-align-justify"></i> Seance List - <a class="btn btn-sm btn-primary" href="~/Seance/Add">Add</a>
     </div>
 </div>
 
@@ -18,7 +18,7 @@
                 <div class="row">
 
                     <div class="col-lg-12">
-                        @using (Html.BeginForm("List", "MoviesType", FormMethod.Post, new { @class = "form-horizontal input-sm", @id = "filterForm" }))
+                        @using (Html.BeginForm("List", "Seance", FormMethod.Post, new { @class = "form-horizontal input-sm", @id = "filterForm" }))
                         {
                             <!-- form get'te submit yapilirken page bilgisi tutulmasi icin -->
                             @Html.HiddenFor(m => m.PageSize, new { @id = "hiddenPageSize" });
@@ -60,6 +60,8 @@
                             <tr>
                                 <th style="width:210px;"> </th>
                                 <th>Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,10 +69,12 @@
                             {
                                 <tr>
                                     <td>
-                                        <a class="btn btn-sm btn-info" href="~/MoviesType/Edit/@item.Id">Edit</a>
-                                        <a class="btn btn-sm btn-warning" href="~/MoviesType/Delete/@item.Id">Delete</a>
+                                        <a class="btn btn-sm btn-info" href="~/Seance/Edit/@item.Id">Edit</a>
+                                        <a class="btn btn-sm btn-warning" href="~/Seance/Delete/@item.Id">Delete</a>
                                     </td>
                                     <td>@item.Name</td>
+                                    <td>@(item.Date.HasValue ?item.Date.Value.ToShortDateString(): "") </td>
+                                    <td>@item.Time</td>
                                 </tr>
                             }
                         </tbody>

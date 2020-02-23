@@ -22,16 +22,7 @@ namespace Cinema.Api.Business
             using (AppDbContext dbContext = new AppDbContext())
             {
 
-                var query = from sa in dbContext.Seance.Where(sa => sa.IsDeleted == false)
-                            where sa.IsDeleted == false
-                            select new Seance()
-                            {
-                                Id = sa.Id,
-                                Name = sa.Name,
-                                Date = sa.Date,
-                                Time =sa.Time,
-                                IsDeleted = sa.IsDeleted,
-                            };
+                var query = dbContext.Seance.Where(s => s.IsDeleted == false).AsNoTracking();
 
                 // filtering
 
@@ -82,16 +73,7 @@ namespace Cinema.Api.Business
 
             using (AppDbContext dbContext = new AppDbContext())
             {
-                var query = from sa in dbContext.Seance.Where(sa => sa.IsDeleted == false)
-                            where sa.IsDeleted == false
-                            select new Seance()
-                            {
-                                Id = sa.Id,
-                                Name = sa.Name,
-                                Date = sa.Date,
-                                Time = sa.Time,
-                                IsDeleted = sa.IsDeleted,
-                            };
+                var query = dbContext.Seance.Where(s => s.IsDeleted == false).AsNoTracking();
                 resultList = query.ToList();
 
             }
