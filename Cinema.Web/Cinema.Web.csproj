@@ -159,6 +159,8 @@
     <Compile Include="Models\User\AddViewModel.cs" />
     <Compile Include="Models\User\ListFilterViewModel.cs" />
     <Compile Include="Models\User\ListViewModel.cs" />
+    <Compile Include="Models\User\LoginViewModel.cs" />
+    <Compile Include="Models\User\LogoutViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -330,8 +332,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\List.cshtml" />
     <Content Include="Views\Profile\List.cshtml" />
@@ -365,6 +365,7 @@
     <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\User\Add.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

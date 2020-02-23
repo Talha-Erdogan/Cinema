@@ -1,4 +1,5 @@
 ﻿using Cinema.Web.Business;
+using Cinema.Web.Business.Common.Session;
 using Cinema.Web.Business.Enums;
 using Cinema.Web.Business.Interfaces;
 using Cinema.Web.Business.Models.User;
@@ -20,6 +21,44 @@ namespace Cinema.Web.Controllers
         {
             _userService = new UserService();
             _profileService = new ProfileService();
+        }
+
+        public ActionResult Login()
+        {
+            Models.User.LoginViewModel model = new LoginViewModel();
+            //select lists
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Login(Models.User.LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                //select lists
+                return View(model);
+            }
+
+            var result = _userService.Login(model.Username, model.Password);
+            if (result.ResultStatusCode != ResultStatusCodeStatic.Success)
+            {
+                return View(model);
+            }
+
+            if (result.Data==null)
+            {
+                return View(model);
+            }
+
+            //todo:session add
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        public ActionResult Logout()
+        {
+            Models.User.LogoutViewModel model = new LogoutViewModel();
+            //select lists
+            return RedirectToAction(nameof(UserController.Login));
         }
 
         public ActionResult List()

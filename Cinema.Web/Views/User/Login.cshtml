@@ -1,0 +1,109 @@
+﻿@model Cinema.Web.Models.User.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Cinema - Cinema">
+    <meta name="author" content="Talha - talha">
+    <meta name="keyword" content="Cinema, cinema">
+    <title>Login</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link href="~/Content/Themes/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Themes/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/Content/Themes/css/style.min.css" rel="stylesheet" />
+
+</head>
+<body class="app flex-row align-items-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-group">
+                    <div class="card p-4">
+                        <div class="card-body">
+                            <h1>Login</h1>
+                            <p class="text-muted">Cinema</p>
+                            @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "form-horizontal input-sm" }))
+                            {
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="icon-user"></i>
+                                        </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control input-sm", placeholder = "Username" })
+
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="icon-lock"></i>
+                                        </span>
+                                    </div>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-sm", placeholder = "Password", value = Model.Password })
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary px-4" type="submit" id="btnSubmit">Login</button>
+                                    </div>
+                                    <div class="col-6 text-right">
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.ValidationMessageFor(m => m.Username, null, new { @class = "help-block text-danger" })
+                                        <br />
+                                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "help-block text-danger" })
+                                        <br />
+                                        @if (ViewBag.Error != null)
+                                        {
+                                            @Html.Label("Error", "Error", new { @class = "help-block text-danger" })
+                                        }
+                                    </div>
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                        <div class="card-body text-center">
+                            <div>
+                                <h2>Cinema</h2>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card bg-warning" style="margin-top:5px; color:black;">
+                    <div class="card-body text-center">
+                        <p class="card-text">
+                        <p>Sample User Of Roles:</p>
+                        <ul class="list-unstyled">
+                            <li>Username: <strong>admin</strong> Password: <strong>123456</strong> - Admin </li>
+                            <li>User: <strong>user</strong> Password: <strong>123456</strong> - User </li>
+                            
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
