@@ -3,6 +3,7 @@ using Cinema.Api.Business.Enums;
 using Cinema.Api.Business.Interfaces;
 using Cinema.Api.Business.Models;
 using Cinema.Api.Data.Entity;
+using Cinema.Api.Filters;
 using Cinema.Api.Models;
 using Cinema.Api.Models.Salon;
 using System;
@@ -26,6 +27,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetAll")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SALON_LIST)]
         public ApiResponseModel<List<Salon>> GetAll([FromBody]GetAllRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<List<Salon>>();
@@ -46,6 +48,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetAllPaginatedWithDetail")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SALON_LIST)]
         public ApiResponseModel<PaginatedList<Salon>> GetAllPaginatedWithDetail([FromBody]GetAllPaginatedRequestModel requestModel)
         {
             if (requestModel.Filter == null)        // filter bilgilerinin default boş değerlerle doldurulması sağlanıyor
@@ -77,6 +80,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetById")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SALON_EDIT)]
         public ApiResponseModel<Salon> GetById([FromBody]GetByIdRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Salon>();
@@ -97,6 +101,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Add")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SALON_ADD)]
         public ApiResponseModel<Salon> Add([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Salon>();
@@ -128,6 +133,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Edit")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SALON_EDIT)]
         public ApiResponseModel<Salon> Edit([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Salon>();
@@ -158,6 +164,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Delete")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SALON_DELETE)]
         public ApiResponseModel<Salon> Delete([FromBody]DeleteRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Salon>();

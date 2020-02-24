@@ -4,6 +4,7 @@ using Cinema.Api.Business.Interfaces;
 using Cinema.Api.Business.Models;
 using Cinema.Api.Business.Models.User;
 using Cinema.Api.Data.Entity;
+using Cinema.Api.Filters;
 using Cinema.Api.Models;
 using Cinema.Api.Models.User;
 using System;
@@ -49,6 +50,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetAllPaginatedWithDetail")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.USER_LIST)]
         public ApiResponseModel<PaginatedList<UserWithDetail>> GetAllPaginatedWithDetail([FromBody]GetAllPaginatedRequestModel requestModel)
         {
             // filter bilgilerinin default boş değerlerle doldurulması sağlanıyor
@@ -106,6 +108,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Add")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.USER_ADD)]
         public ApiResponseModel<User> Add([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<User>();
@@ -143,6 +146,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Edit")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.USER_EDIT)]
         public ApiResponseModel<User> Edit([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<User>();
@@ -181,6 +185,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Delete")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.USER_DELETE)]
         public ApiResponseModel<User> Delete([FromBody]DeleteRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<User>();

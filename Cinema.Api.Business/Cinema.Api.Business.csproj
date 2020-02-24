@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthService.cs" />
+    <Compile Include="Enums\AuthCodeStatic.cs" />
     <Compile Include="Enums\ResultStatusCodeStatic.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IMoviesService.cs" />

@@ -3,6 +3,7 @@ using Cinema.Api.Business.Enums;
 using Cinema.Api.Business.Interfaces;
 using Cinema.Api.Business.Models;
 using Cinema.Api.Data.Entity;
+using Cinema.Api.Filters;
 using Cinema.Api.Models;
 using Cinema.Api.Models.Seance;
 using System;
@@ -26,6 +27,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetAll")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SEANCE_LIST)]
         public ApiResponseModel<List<Seance>> GetAll([FromBody]GetAllRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<List<Seance>>();
@@ -46,6 +48,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetAllPaginatedWithDetail")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SEANCE_LIST)]
         public ApiResponseModel<PaginatedList<Seance>> GetAllPaginatedWithDetail([FromBody]GetAllPaginatedRequestModel requestModel)
         {
             if (requestModel.Filter == null)        // filter bilgilerinin default boş değerlerle doldurulması sağlanıyor
@@ -77,6 +80,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetById")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SEANCE_EDIT)]
         public ApiResponseModel<Seance> GetById([FromBody]GetByIdRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Seance>();
@@ -97,6 +101,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Add")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SEANCE_ADD)]
         public ApiResponseModel<Seance> Add([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Seance>();
@@ -130,6 +135,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Edit")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SEANCE_EDIT)]
         public ApiResponseModel<Seance> Edit([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Seance>();
@@ -162,6 +168,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Delete")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.SEANCE_DELETE)]
         public ApiResponseModel<Seance> Delete([FromBody]DeleteRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Seance>();

@@ -3,6 +3,7 @@ using Cinema.Api.Business.Enums;
 using Cinema.Api.Business.Interfaces;
 using Cinema.Api.Business.Models;
 using Cinema.Api.Data.Entity;
+using Cinema.Api.Filters;
 using Cinema.Api.Models;
 using Cinema.Api.Models.MoviesType;
 using System;
@@ -25,6 +26,7 @@ namespace Cinema.Api.Controllers
         }
         [Route("GetAll")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_LIST)]
         public ApiResponseModel<List<MoviesType>> GetAll([FromBody]GetAllRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<List<Data.Entity.MoviesType>>();
@@ -45,6 +47,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetAllPaginatedWithDetail")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_LIST)]
         public ApiResponseModel<PaginatedList<MoviesType>> GetAllPaginatedWithDetail([FromBody]GetAllPaginatedRequestModel requestModel)
         {
             if (requestModel.Filter == null)        // filter bilgilerinin default boş değerlerle doldurulması sağlanıyor
@@ -76,6 +79,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetById")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_EDIT)]
         public ApiResponseModel<MoviesType> GetById([FromBody]GetByIdRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<MoviesType>();
@@ -96,6 +100,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Add")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_ADD)]
         public ApiResponseModel<MoviesType> Add([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<MoviesType>();
@@ -128,6 +133,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Edit")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_EDIT)]
         public ApiResponseModel<MoviesType> Edit([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<MoviesType>();
@@ -158,6 +164,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Delete")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_DELETE)]
         public ApiResponseModel<MoviesType> Delete([FromBody]DeleteRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<MoviesType>();

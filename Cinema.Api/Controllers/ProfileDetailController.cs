@@ -2,6 +2,7 @@
 using Cinema.Api.Business.Enums;
 using Cinema.Api.Business.Interfaces;
 using Cinema.Api.Business.Models;
+using Cinema.Api.Filters;
 using Cinema.Api.Models;
 using Cinema.Api.Models.ProfileDetail;
 using System;
@@ -25,6 +26,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetAllAuth")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.PROFILEDETAIL_BATCHEDIT)]
         public ApiResponseModel<List<Data.Entity.Auth>> GetAllAuthByProfileId([FromBody]GetAllAuthByProfileIdRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<List<Data.Entity.Auth>>();
@@ -51,6 +53,7 @@ namespace Cinema.Api.Controllers
 
         [Route("GetAllAuthWhichIsNotIncluded")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.PROFILEDETAIL_BATCHEDIT)]
         public ApiResponseModel<List<Data.Entity.Auth>> GetAllAuthByProfileIdWhichIsNotIncluded([FromBody]GetAllAuthByProfileIdWhichIsNotIncludedRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<List<Data.Entity.Auth>>();
@@ -121,6 +124,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Add")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.PROFILEDETAIL_BATCHEDIT)]
         public ApiResponseModel<Data.Entity.ProfileDetail> Add([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Data.Entity.ProfileDetail>();
@@ -154,6 +158,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Edit")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.PROFILEDETAIL_BATCHEDIT)]
         public ApiResponseModel<Data.Entity.ProfileDetail> Edit([FromBody]AddRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<Data.Entity.ProfileDetail>();
@@ -188,6 +193,7 @@ namespace Cinema.Api.Controllers
 
         [Route("Delete")]
         [HttpPost]
+        [TokenAuthorizeFilter(AuthCodeStatic.PROFILEDETAIL_BATCHEDIT)]
         public ApiResponseModel<int> DeleteByProfileIdAndAuthId([FromBody]DeleteByProfileIdAndAuthIdRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<int>();
