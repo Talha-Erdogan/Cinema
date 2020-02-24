@@ -1,7 +1,9 @@
 ﻿using Cinema.Web.Business;
+using Cinema.Web.Business.Common.Session;
 using Cinema.Web.Business.Enums;
 using Cinema.Web.Business.Interfaces;
 using Cinema.Web.Business.Models.MoviesType;
+using Cinema.Web.Filters;
 using Cinema.Web.Models.MoviesType;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace Cinema.Web.Controllers
             _moviesTypeService = new MoviesTypeService();
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_LIST)]
         public ActionResult List()
         {
             ListViewModel model = new ListViewModel();
@@ -41,7 +44,7 @@ namespace Cinema.Web.Controllers
             searchFilter.CurrentPage = model.CurrentPage.HasValue ? model.CurrentPage.Value : 1;
             searchFilter.PageSize = model.PageSize.HasValue ? model.PageSize.Value : 10;
 
-            var apiResponseModel = _moviesTypeService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter); //todo:token
+            var apiResponseModel = _moviesTypeService.GetAllPaginatedWithDetailBySearchFilter(SessionHelper.CurrentUser.UserToken, searchFilter); 
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 model.DataList = apiResponseModel.Data;
@@ -57,6 +60,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_LIST)]
         [HttpPost]
         public ActionResult List(ListViewModel model)
         {
@@ -83,7 +87,7 @@ namespace Cinema.Web.Controllers
             searchFilter.SortDirection = model.SortDirection;
                         searchFilter.Filter_Name = model.Filter.Filter_Name;
 
-            var apiResponseModel = _moviesTypeService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter);//todo:token
+            var apiResponseModel = _moviesTypeService.GetAllPaginatedWithDetailBySearchFilter(SessionHelper.CurrentUser.UserToken, searchFilter);
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 model.DataList = apiResponseModel.Data;
@@ -99,6 +103,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_ADD)]
         public ActionResult Add()
         {
             Models.MoviesType.AddViewModel model = new AddViewModel();
@@ -107,6 +112,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_ADD)]
         [HttpPost]
         public ActionResult Add(Models.MoviesType.AddViewModel model)
         {
@@ -119,7 +125,7 @@ namespace Cinema.Web.Controllers
             Business.Models.MoviesType.MoviesType moviesType = new Business.Models.MoviesType.MoviesType();
 
             moviesType.Name = model.Name;
-            var apiResponseModel = _moviesTypeService.Add("", moviesType);//todo:token
+            var apiResponseModel = _moviesTypeService.Add(SessionHelper.CurrentUser.UserToken, moviesType);
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 return RedirectToAction(nameof(MoviesTypeController.List));
@@ -131,12 +137,12 @@ namespace Cinema.Web.Controllers
             }
         }
 
-
+        [AppAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_EDIT)]
         public ActionResult Edit(int id)
         {
             Models.MoviesType.AddViewModel model = new AddViewModel();
             //select lists
-            var apiResponseModel = _moviesTypeService.GetById("", id); //todo:token
+            var apiResponseModel = _moviesTypeService.GetById(SessionHelper.CurrentUser.UserToken, id); 
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiResponseModel.ResultStatusMessage;
@@ -153,6 +159,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_EDIT)]
         [HttpPost]
         public ActionResult Edit(Models.MoviesType.AddViewModel model)
         {
@@ -162,7 +169,7 @@ namespace Cinema.Web.Controllers
                 return View(model);
             }
 
-            var apiResponseModel = _moviesTypeService.GetById("", model.Id);//todo:token
+            var apiResponseModel = _moviesTypeService.GetById(SessionHelper.CurrentUser.UserToken, model.Id);
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 //select lists
@@ -179,22 +186,23 @@ namespace Cinema.Web.Controllers
 
                         moviesType.Name = model.Name;
 
-            var apiEditResponseModel = _moviesTypeService.Edit("", moviesType);//todo:token
+            var apiEditResponseModel = _moviesTypeService.Edit(SessionHelper.CurrentUser.UserToken, moviesType);
             if (apiEditResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiEditResponseModel.ResultStatusMessage != null ? apiEditResponseModel.ResultStatusMessage : "Not Edited";
-                // todo: select lists
+                //  select lists
                 return View(model);
             }
 
             return RedirectToAction(nameof(MoviesTypeController.List));
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_DELETE)]
         public ActionResult Delete(int id)
         {
             Models.MoviesType.AddViewModel model = new AddViewModel();
             //select lists
-            var apiResponseModel = _moviesTypeService.GetById("", id); //todo:token
+            var apiResponseModel = _moviesTypeService.GetById(SessionHelper.CurrentUser.UserToken, id); 
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiResponseModel.ResultStatusMessage;
@@ -207,7 +215,7 @@ namespace Cinema.Web.Controllers
                 ViewBag.ErrorMessage = "Not Found Record";
                 return RedirectToAction(nameof(MoviesTypeController.List));
             }
-            var apiDeleteResponseModel = _moviesTypeService.Delete("", id); //todo:token
+            var apiDeleteResponseModel = _moviesTypeService.Delete(SessionHelper.CurrentUser.UserToken, id);
             if (apiDeleteResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiDeleteResponseModel.ResultStatusMessage;
@@ -216,8 +224,5 @@ namespace Cinema.Web.Controllers
 
             return RedirectToAction(nameof(MoviesTypeController.List));
         }
-
-
-
     }
 }

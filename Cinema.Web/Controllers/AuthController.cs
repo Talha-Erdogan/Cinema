@@ -4,6 +4,7 @@ using Cinema.Web.Business.Enums;
 using Cinema.Web.Business.Interfaces;
 using Cinema.Web.Business.Models;
 using Cinema.Web.Business.Models.Auth;
+using Cinema.Web.Filters;
 using Cinema.Web.Models.Auth;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Cinema.Web.Controllers
             _authService = new AuthService();
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.AUTH_LIST)]
         public ActionResult List()
         {
             ListViewModel model = new ListViewModel();
@@ -44,7 +46,7 @@ namespace Cinema.Web.Controllers
             searchFilter.CurrentPage = model.CurrentPage.HasValue ? model.CurrentPage.Value : 1;
             searchFilter.PageSize = model.PageSize.HasValue ? model.PageSize.Value : 10;
             
-            var apiResponseModel = _authService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter);//todo:token
+            var apiResponseModel = _authService.GetAllPaginatedWithDetailBySearchFilter(SessionHelper.CurrentUser.UserToken, searchFilter);
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 model.DataList = apiResponseModel.Data;
@@ -60,6 +62,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.AUTH_LIST)]
         [HttpPost]
         public ActionResult List(ListViewModel model)
         {
@@ -87,7 +90,7 @@ namespace Cinema.Web.Controllers
             searchFilter.Filter_Code = model.Filter.Filter_Code;
             searchFilter.Filter_Name = model.Filter.Filter_Name;
 
-            var apiResponseModel = _authService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter);//todo:token
+            var apiResponseModel = _authService.GetAllPaginatedWithDetailBySearchFilter(SessionHelper.CurrentUser.UserToken, searchFilter);
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 model.DataList = apiResponseModel.Data;
@@ -103,6 +106,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.AUTH_ADD)]
         public ActionResult Add()
         {
             Models.Auth.AddViewModel model = new AddViewModel();
@@ -111,6 +115,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.AUTH_ADD)]
         [HttpPost]
         public ActionResult Add(Models.Auth.AddViewModel model)
         {
@@ -123,7 +128,7 @@ namespace Cinema.Web.Controllers
             Business.Models.Auth.Auth auth = new Business.Models.Auth.Auth();
             auth.Code = model.Code;
             auth.Name = model.Name;
-            var apiResponseModel = _authService.Add("", auth);//todo:token
+            var apiResponseModel = _authService.Add(SessionHelper.CurrentUser.UserToken, auth);
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 return RedirectToAction(nameof(AuthController.List));
@@ -135,11 +140,12 @@ namespace Cinema.Web.Controllers
             }
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.AUTH_EDIT)]
         public ActionResult Edit(int id)
         {
             Models.Auth.AddViewModel model = new AddViewModel();
             //select lists
-            var apiResponseModel = _authService.GetById("", id); //todo:token
+            var apiResponseModel = _authService.GetById(SessionHelper.CurrentUser.UserToken, id); 
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiResponseModel.ResultStatusMessage;
@@ -157,6 +163,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.AUTH_EDIT)]
         [HttpPost]
         public ActionResult Edit(Models.Auth.AddViewModel model)
         {
@@ -166,7 +173,7 @@ namespace Cinema.Web.Controllers
                 return View(model);
             }
 
-            var apiResponseModel = _authService.GetById("", model.Id);//todo:token
+            var apiResponseModel = _authService.GetById(SessionHelper.CurrentUser.UserToken, model.Id);
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 //select lists
@@ -184,22 +191,23 @@ namespace Cinema.Web.Controllers
             auth.Code = model.Code;
             auth.Name = model.Name;
 
-            var apiEditResponseModel = _authService.Edit("", auth);//todo:token
+            var apiEditResponseModel = _authService.Edit(SessionHelper.CurrentUser.UserToken, auth);
             if (apiEditResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiEditResponseModel.ResultStatusMessage != null ? apiEditResponseModel.ResultStatusMessage : "Not Edited";
-                // todo: select lists
+                // select lists
                 return View(model);
             }
 
             return RedirectToAction(nameof(AuthController.List));
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.AUTH_DELETE)]
         public ActionResult Delete(int id)
         {
             Models.Auth.AddViewModel model = new AddViewModel();
             //select lists
-            var apiResponseModel = _authService.GetById("", id); //todo:token
+            var apiResponseModel = _authService.GetById(SessionHelper.CurrentUser.UserToken, id); 
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiResponseModel.ResultStatusMessage;
@@ -212,7 +220,7 @@ namespace Cinema.Web.Controllers
                 ViewBag.ErrorMessage = "Not Found Record";
                 return RedirectToAction(nameof(AuthController.List));
             }
-            var apiDeleteResponseModel = _authService.Delete("", id); //todo:token
+            var apiDeleteResponseModel = _authService.Delete(SessionHelper.CurrentUser.UserToken, id); 
             if (apiDeleteResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiDeleteResponseModel.ResultStatusMessage;

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Cinema.Web.Business.Common.Session
+@using Cinema.Web.Business.Enums
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -129,7 +131,7 @@
                     <ul class="navbar-nav nav-flex-icons">
                         <li class="nav-item dropdown">
                             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                User Name and Surname
+                                @SessionHelper.CurrentUser.Name @SessionHelper.CurrentUser.Surname
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#">
@@ -156,30 +158,54 @@
             </a>
 
             <div class="list-group list-group-flush">
-                <a href="~/User/List" class="list-group-item list-group-item-action waves-effect ">
-                    <i class="fas fa-user mr-3"></i>User
-                </a>
-                <a href="~/Profile/List" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-user mr-3"></i>Profile
-                </a>
-                <a href="~/Auth/List" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-table mr-3"></i>Auth
-                </a>
-                <a href="~/ProfileDetail/BatchEdit" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-table mr-3"></i>Profile Detail
-                </a>
-                <a href="~/MoviesType/List" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-table mr-3"></i>Movies Type
-                </a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-money-bill-alt mr-3"></i>Movies
-                </a>
-                <a href="~/Salon/List" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-money-bill-alt mr-3"></i>Salon
-                </a>
-                <a href="~/Seance/List" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-money-bill-alt mr-3"></i>Seance
-                </a>
+                @if (SessionHelper.CheckAuthForCurrentUser(AuthCodeStatic.USER_LIST))
+                {
+                    <a href="~/User/List" class="list-group-item list-group-item-action waves-effect ">
+                        <i class="fas fa-user mr-3"></i>User
+                    </a>
+                }
+                @if (SessionHelper.CheckAuthForCurrentUser(AuthCodeStatic.PROFILE_LIST))
+                {
+                    <a href="~/Profile/List" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-user mr-3"></i>Profile
+                    </a>
+                }
+                @if (SessionHelper.CheckAuthForCurrentUser(AuthCodeStatic.AUTH_LIST))
+                {
+                    <a href="~/Auth/List" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-table mr-3"></i>Auth
+                    </a>
+                }
+                @if (SessionHelper.CheckAuthForCurrentUser(AuthCodeStatic.PROFILEDETAIL_BATCHEDIT))
+                {
+                    <a href="~/ProfileDetail/BatchEdit" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-table mr-3"></i>Profile Detail
+                    </a>
+                }
+                @if (SessionHelper.CheckAuthForCurrentUser(AuthCodeStatic.MOVIESTYPE_LIST))
+                {
+                    <a href="~/MoviesType/List" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-table mr-3"></i>Movies Type
+                    </a>
+                }
+                @if (SessionHelper.CheckAuthForCurrentUser(AuthCodeStatic.MOVIES_LIST))
+                {
+                    <a href="#" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-money-bill-alt mr-3"></i>Movies
+                    </a>
+                }
+                @if (SessionHelper.CheckAuthForCurrentUser(AuthCodeStatic.SALON_LIST))
+                {
+                    <a href="~/Salon/List" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-money-bill-alt mr-3"></i>Salon
+                    </a>
+                }
+                @if (SessionHelper.CheckAuthForCurrentUser(AuthCodeStatic.SEANCE_LIST))
+                {
+                    <a href="~/Seance/List" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-money-bill-alt mr-3"></i>Seance
+                    </a>
+                }
             </div>
 
         </div>

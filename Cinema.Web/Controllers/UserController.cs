@@ -3,6 +3,7 @@ using Cinema.Web.Business.Common.Session;
 using Cinema.Web.Business.Enums;
 using Cinema.Web.Business.Interfaces;
 using Cinema.Web.Business.Models.User;
+using Cinema.Web.Filters;
 using Cinema.Web.Models.User;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,13 @@ namespace Cinema.Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IProfileService _profileService;
+        private readonly IAuthService _authService;
 
         public UserController()
         {
             _userService = new UserService();
             _profileService = new ProfileService();
+            _authService = new AuthService();
         }
 
         public ActionResult Login()
@@ -39,28 +42,37 @@ namespace Cinema.Web.Controllers
                 return View(model);
             }
 
-            var result = _userService.Login(model.Username, model.Password);
-            if (result.ResultStatusCode != ResultStatusCodeStatic.Success)
+            SessionLoginResult result = SessionHelper.Login(model.Username, model.Password, _userService, _authService, _profileService);
+            if (result.IsSuccess)
             {
+                if (ModelState.IsValid)
+                {
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                }
+
+                // select lists
                 return View(model);
             }
-
-            if (result.Data==null)
+            else
             {
+                ViewBag.Error = result.Message;
+                // select lists
                 return View(model);
             }
-
-            //todo:session add
-            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         public ActionResult Logout()
         {
             Models.User.LogoutViewModel model = new LogoutViewModel();
-            //select lists
+            SessionHelper.Logout(_userService);
             return RedirectToAction(nameof(UserController.Login));
         }
+        public ActionResult NotAuthorized()
+        {
+            return View();
+        }
 
+        [AppAuthorizeFilter(AuthCodeStatic.USER_LIST)]
         public ActionResult List()
         {
             ListViewModel model = new ListViewModel();
@@ -80,13 +92,13 @@ namespace Cinema.Web.Controllers
                 model.PageSize = 10;
             }
             //select list
-            model.ProfileSelectList = GetProfileSelectList("");//todo:token
+            model.ProfileSelectList = GetProfileSelectList(SessionHelper.CurrentUser.UserToken);
 
             UserSearchFilter searchFilter = new UserSearchFilter();
             searchFilter.CurrentPage = model.CurrentPage.HasValue ? model.CurrentPage.Value : 1;
             searchFilter.PageSize = model.PageSize.HasValue ? model.PageSize.Value : 10;
 
-            var apiResponseModel = _userService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter); //todo:token
+            var apiResponseModel = _userService.GetAllPaginatedWithDetailBySearchFilter(SessionHelper.CurrentUser.UserToken, searchFilter); 
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 model.DataList = apiResponseModel.Data;
@@ -102,6 +114,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.USER_LIST)]
         [HttpPost]
         public ActionResult List(ListViewModel model)
         {
@@ -132,7 +145,7 @@ namespace Cinema.Web.Controllers
             searchFilter.Filter_Surname = model.Filter.Filter_Surname;
             searchFilter.Filter_ProfileId = model.Filter.Filter_ProfileId;
 
-            var apiResponseModel = _userService.GetAllPaginatedWithDetailBySearchFilter("", searchFilter);//todo:token
+            var apiResponseModel = _userService.GetAllPaginatedWithDetailBySearchFilter(SessionHelper.CurrentUser.UserToken, searchFilter);
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 model.DataList = apiResponseModel.Data;
@@ -149,6 +162,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.USER_ADD)]
         public ActionResult Add()
         {
             Models.User.AddViewModel model = new AddViewModel();
@@ -157,6 +171,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.USER_ADD)]
         [HttpPost]
         public ActionResult Add(Models.User.AddViewModel model)
         {
@@ -173,7 +188,7 @@ namespace Cinema.Web.Controllers
             user.Surname = model.Surname;
             user.Mail = model.Mail;
             user.ProfileId = model.ProfileId;
-            var apiResponseModel = _userService.Add("", user);//todo:token
+            var apiResponseModel = _userService.Add(SessionHelper.CurrentUser.UserToken, user);
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
             {
                 return RedirectToAction(nameof(UserController.List));
@@ -186,12 +201,13 @@ namespace Cinema.Web.Controllers
             }
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.USER_EDIT)]
         public ActionResult Edit(int id)
         {
             Models.User.AddViewModel model = new AddViewModel();
             //select lists
             model.ProfileSelectList = GetProfileSelectList("");
-            var apiResponseModel = _userService.GetById("", id); //todo:token
+            var apiResponseModel = _userService.GetById(SessionHelper.CurrentUser.UserToken, id); 
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 model.ProfileSelectList = GetProfileSelectList("");
@@ -214,6 +230,7 @@ namespace Cinema.Web.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.USER_EDIT)]
         [HttpPost]
         public ActionResult Edit(Models.User.AddViewModel model)
         {
@@ -224,7 +241,7 @@ namespace Cinema.Web.Controllers
                 return View(model);
             }
 
-            var apiResponseModel = _userService.GetById("", model.Id);//todo:token
+            var apiResponseModel = _userService.GetById(SessionHelper.CurrentUser.UserToken, model.Id);
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 //select lists
@@ -245,7 +262,7 @@ namespace Cinema.Web.Controllers
             user.Surname = model.Surname;
             user.Mail = model.Mail;
             user.ProfileId = model.ProfileId;
-            var apiEditResponseModel = _userService.Edit("", user);//todo:token
+            var apiEditResponseModel = _userService.Edit(SessionHelper.CurrentUser.UserToken, user);
             if (apiEditResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiEditResponseModel.ResultStatusMessage != null ? apiEditResponseModel.ResultStatusMessage : "Not Edited";
@@ -257,12 +274,13 @@ namespace Cinema.Web.Controllers
             return RedirectToAction(nameof(UserController.List));
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.USER_DELETE)]
         public ActionResult Delete(int id)
         {
             Models.User.AddViewModel model = new AddViewModel();
             //select lists
 
-            var apiResponseModel = _userService.GetById("", id); //todo:token
+            var apiResponseModel = _userService.GetById(SessionHelper.CurrentUser.UserToken, id); 
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiResponseModel.ResultStatusMessage;
@@ -275,7 +293,7 @@ namespace Cinema.Web.Controllers
                 ViewBag.ErrorMessage = "Not Found Record";
                 return RedirectToAction(nameof(UserController.List));
             }
-            var apiDeleteResponseModel = _userService.Delete("", id); //todo:token
+            var apiDeleteResponseModel = _userService.Delete(SessionHelper.CurrentUser.UserToken, id);
             if (apiDeleteResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiDeleteResponseModel.ResultStatusMessage;

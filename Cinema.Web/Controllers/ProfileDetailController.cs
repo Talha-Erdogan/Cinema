@@ -3,6 +3,7 @@ using Cinema.Web.Business.Common.Session;
 using Cinema.Web.Business.Enums;
 using Cinema.Web.Business.Interfaces;
 using Cinema.Web.Business.Models.ProfileDetail;
+using Cinema.Web.Filters;
 using Cinema.Web.Models.ProfileDetail;
 using System;
 using System.Collections.Generic;
@@ -22,40 +23,42 @@ namespace Cinema.Web.Controllers
             _profileService = new ProfileService();
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PROFILEDETAIL_BATCHEDIT)]
         public ActionResult BatchEdit( int profileId = 0)
         {
             BatchEditViewModel model = new BatchEditViewModel();
 
             if (profileId > 0)
             {
-                var profile = _profileService.GetById("", profileId).Data;//todo:token
+                var profile = _profileService.GetById(SessionHelper.CurrentUser.UserToken, profileId).Data;
                 if (profile == null)
                 {
                     return View("_ErrorNotExistProfile");
                 }
-                model.ProfileSelectList = GetProfileSelectList("");//todo:token
+                model.ProfileSelectList = GetProfileSelectList(SessionHelper.CurrentUser.UserToken);
 
-                model.AuthList = GetAllAuthByProfileId("", profileId);//todo:token
-                model.AuthWhichIsNotIncludeList = GetAllAuthByProfileIdWhichIsNotIncluded("", profileId);//todo:token
+                model.AuthList = GetAllAuthByProfileId(SessionHelper.CurrentUser.UserToken, profileId);
+                model.AuthWhichIsNotIncludeList = GetAllAuthByProfileIdWhichIsNotIncluded(SessionHelper.CurrentUser.UserToken, profileId);
             }
             else
             {
-                model.ProfileSelectList = GetProfileSelectList("");//todo:token
+                model.ProfileSelectList = GetProfileSelectList(SessionHelper.CurrentUser.UserToken);
                 model.AuthList = new List<AuthCheckViewModel>();
                 model.AuthWhichIsNotIncludeList = new List<AuthCheckViewModel>();
             }
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PROFILEDETAIL_BATCHEDIT)]
         [HttpPost]
         public ActionResult BatchEdit(BatchEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 BatchEditViewModel batchEditViewModel = new BatchEditViewModel();
-                batchEditViewModel.ProfileSelectList = GetProfileSelectList("");//todo:token
-                batchEditViewModel.AuthList = GetAllAuthByProfileId("",model.ProfileId);//todo:token
-                batchEditViewModel.AuthWhichIsNotIncludeList = GetAllAuthByProfileIdWhichIsNotIncluded("", model.ProfileId);//todo:token
+                batchEditViewModel.ProfileSelectList = GetProfileSelectList(SessionHelper.CurrentUser.UserToken);
+                batchEditViewModel.AuthList = GetAllAuthByProfileId(SessionHelper.CurrentUser.UserToken, model.ProfileId);
+                batchEditViewModel.AuthWhichIsNotIncludeList = GetAllAuthByProfileIdWhichIsNotIncluded(SessionHelper.CurrentUser.UserToken, model.ProfileId);
                 return View(batchEditViewModel);
             }
 
@@ -71,7 +74,7 @@ namespace Cinema.Web.Controllers
                             ProfileDetail profileDetail = new ProfileDetail();
                             profileDetail.AuthId = item.Id;
                             profileDetail.ProfileId = model.ProfileId;
-                            _profileDetailService.Add("", profileDetail);//todo:token
+                            _profileDetailService.Add(SessionHelper.CurrentUser.UserToken, profileDetail);
                         }
                     }
                 }
@@ -85,7 +88,7 @@ namespace Cinema.Web.Controllers
                     {
                         foreach (var item in record)
                         {
-                            var apiResponseModel = _profileDetailService.DeleteByProfileIdAndAuthId("", model.ProfileId, item.Id);//todo:token
+                            var apiResponseModel = _profileDetailService.DeleteByProfileIdAndAuthId(SessionHelper.CurrentUser.UserToken, model.ProfileId, item.Id);
                             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
                             {
                                 //not error
@@ -93,9 +96,9 @@ namespace Cinema.Web.Controllers
                             else
                             {
                                 BatchEditViewModel batchEditViewModel = new BatchEditViewModel();
-                                batchEditViewModel.ProfileSelectList = GetProfileSelectList("");//todo:token
-                                batchEditViewModel.AuthList = GetAllAuthByProfileId("",model.ProfileId);//todo:token
-                                batchEditViewModel.AuthWhichIsNotIncludeList = GetAllAuthByProfileIdWhichIsNotIncluded("",  model.ProfileId);//todo:token
+                                batchEditViewModel.ProfileSelectList = GetProfileSelectList(SessionHelper.CurrentUser.UserToken);
+                                batchEditViewModel.AuthList = GetAllAuthByProfileId(SessionHelper.CurrentUser.UserToken, model.ProfileId);
+                                batchEditViewModel.AuthWhichIsNotIncludeList = GetAllAuthByProfileIdWhichIsNotIncluded(SessionHelper.CurrentUser.UserToken,  model.ProfileId);
                                 ViewBag.ErrorMessage = apiResponseModel.ResultStatusMessage;
                                 return View(batchEditViewModel);
                             }
@@ -122,7 +125,7 @@ namespace Cinema.Web.Controllers
         private List<AuthCheckViewModel> GetAllAuthByProfileId(string userToken,int profileId)
         {
             List<AuthCheckViewModel> resultList = new List<AuthCheckViewModel>();
-            var apiResponseModel = _profileDetailService.GetAllAuthByProfileId("", profileId);//todo:token
+            var apiResponseModel = _profileDetailService.GetAllAuthByProfileId(userToken, profileId);
             resultList = apiResponseModel.Data.Select(a => new AuthCheckViewModel() { Id = a.Id, Name = a.Name, Checked = false, Code = a.Code }).ToList();
             return resultList;
         }
@@ -131,7 +134,7 @@ namespace Cinema.Web.Controllers
         private List<AuthCheckViewModel> GetAllAuthByProfileIdWhichIsNotIncluded(string userToken, int profileId)
         {
             List<AuthCheckViewModel> resultList = new List<AuthCheckViewModel>();
-            var apiResponseModel = _profileDetailService.GetAllAuthByProfileIdWhichIsNotIncluded("", profileId);//todo:token
+            var apiResponseModel = _profileDetailService.GetAllAuthByProfileIdWhichIsNotIncluded(userToken, profileId);
             resultList = apiResponseModel.Data.Select(a => new AuthCheckViewModel() { Id = a.Id, Name = a.Name, Checked = false, Code = a.Code }).ToList();
             return resultList;
         }

@@ -92,7 +92,6 @@ namespace Cinema.Web.Business.Common.Session
         {
             var apiUserResponseModel = userService.Logout();
             CurrentHttpContext.Session.Clear();
-            //CurrentHttpContext.Session.RemoveAll();
             foreach (var item in CurrentHttpContext.Session.Keys)
             {
                 CurrentHttpContext.Session.Remove(item.ToString());

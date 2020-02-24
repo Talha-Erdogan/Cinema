@@ -67,7 +67,7 @@
                                         <br />
                                         @if (ViewBag.Error != null)
                                         {
-                                            @Html.Label("Error", "Error", new { @class = "help-block text-danger" })
+                                            @Html.Label("Error", ViewBag.Error as string, new { @class = "help-block text-danger" })
                                         }
                                     </div>
                                 </div>

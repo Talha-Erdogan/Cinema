@@ -99,6 +99,7 @@
     <Compile Include="Common\Session\SessionHelper.cs" />
     <Compile Include="Common\Session\SessionLoginResult.cs" />
     <Compile Include="Common\Session\SessionUser.cs" />
+    <Compile Include="Enums\AuthCodeStatic.cs" />
     <Compile Include="Enums\ResultStatusCodeStatic.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
     <Compile Include="Interfaces\IMoviesTypeService.cs" />

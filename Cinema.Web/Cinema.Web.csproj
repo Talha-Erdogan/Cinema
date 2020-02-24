@@ -135,6 +135,7 @@
     <Compile Include="Controllers\SalonController.cs" />
     <Compile Include="Controllers\SeanceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\AppAuthorizeFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -366,6 +367,7 @@
     <Content Include="Views\User\Add.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\NotAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
