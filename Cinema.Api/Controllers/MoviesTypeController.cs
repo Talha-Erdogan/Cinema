@@ -26,7 +26,6 @@ namespace Cinema.Api.Controllers
         }
         [Route("GetAll")]
         [HttpPost]
-        [TokenAuthorizeFilter(AuthCodeStatic.MOVIESTYPE_LIST)]
         public ApiResponseModel<List<MoviesType>> GetAll([FromBody]GetAllRequestModel requestModel)
         {
             var responseModel = new ApiResponseModel<List<Data.Entity.MoviesType>>();

@@ -102,6 +102,7 @@
     <Compile Include="Enums\AuthCodeStatic.cs" />
     <Compile Include="Enums\ResultStatusCodeStatic.cs" />
     <Compile Include="Interfaces\IAuthService.cs" />
+    <Compile Include="Interfaces\IMoviesService.cs" />
     <Compile Include="Interfaces\IMoviesTypeService.cs" />
     <Compile Include="Interfaces\IProfileDetailService.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
@@ -129,6 +130,15 @@
     <Compile Include="Models\MoviesType\ListFilterRequestModel.cs" />
     <Compile Include="Models\MoviesType\MoviesType.cs" />
     <Compile Include="Models\MoviesType\MoviesTypeSearchFilter.cs" />
+    <Compile Include="Models\Movies\AddRequestModel.cs" />
+    <Compile Include="Models\Movies\DeleteRequestModel.cs" />
+    <Compile Include="Models\Movies\GetAllPaginatedRequestModel.cs" />
+    <Compile Include="Models\Movies\GetAllRequestModel.cs" />
+    <Compile Include="Models\Movies\GetByIdRequestModel.cs" />
+    <Compile Include="Models\Movies\ListFilterRequestModel.cs" />
+    <Compile Include="Models\Movies\Movies.cs" />
+    <Compile Include="Models\Movies\MoviesSearchFilter.cs" />
+    <Compile Include="Models\Movies\MoviesWithDetail.cs" />
     <Compile Include="Models\PaginatedList.cs" />
     <Compile Include="Models\ProfileDetail\AddRequestModel.cs" />
     <Compile Include="Models\ProfileDetail\DeleteByProfileIdAndAuthIdRequestModel.cs" />
@@ -170,6 +180,7 @@
     <Compile Include="Models\User\User.cs" />
     <Compile Include="Models\User\UserSearchFilter.cs" />
     <Compile Include="Models\User\UserWithDetail.cs" />
+    <Compile Include="MoviesService.cs" />
     <Compile Include="MoviesTypeService.cs" />
     <Compile Include="ProfileDetailService.cs" />
     <Compile Include="ProfileService.cs" />

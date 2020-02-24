@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\MoviesTypeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ProfileDetailController.cs" />
@@ -146,6 +147,9 @@
     <Compile Include="Models\MoviesType\AddViewModel.cs" />
     <Compile Include="Models\MoviesType\ListFilterViewModel.cs" />
     <Compile Include="Models\MoviesType\ListViewModel.cs" />
+    <Compile Include="Models\Movies\AddViewModel.cs" />
+    <Compile Include="Models\Movies\ListFilterViewModel.cs" />
+    <Compile Include="Models\Movies\ListViewModel.cs" />
     <Compile Include="Models\ProfileDetail\AuthCheckViewModel.cs" />
     <Compile Include="Models\ProfileDetail\BatchEditViewModel.cs" />
     <Compile Include="Models\Profile\AddViewModel.cs" />
@@ -368,6 +372,11 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\NotAuthorized.cshtml" />
+    <Content Include="Views\Movies\List.cshtml" />
+    <Content Include="Views\Movies\Add.cshtml" />
+    <Content Include="Views\Movies\Edit.cshtml" />
+    <Content Include="Views\Movies\_PagingPartial.cshtml" />
+    <Content Include="Views\Movies\_ErrorNotExist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

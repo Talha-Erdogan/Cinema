@@ -1,0 +1,88 @@
+﻿@model Cinema.Web.Models.Movies.AddViewModel
+@{
+    ViewData["Title"] = "Movies Add";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong> Add </strong>
+            </div>
+            <div class="card-body">
+
+                @using (Html.BeginForm("Add", "Movies", FormMethod.Post, new { @class = "form-horizontal input-sm" }))
+                {
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Name</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block text-danger" })
+                        </div>
+
+                        <label class="col-md-2 col-form-label">Type</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.TypeId, Model.MoviesTypeSelectList, "Select", new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(m => m.TypeId, null, new { @class = "help-block text-danger" })
+                        </div>
+
+                        <label class="col-md-2 col-form-label">Seance</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.SeanceId, Model.SeanceSelectList, "Select", new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(m => m.SeanceId, null, new { @class = "help-block text-danger" })
+                        </div>
+
+                        <label class="col-md-2 col-form-label">Salon</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.SalonId, Model.SalonSelectList, "Select", new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(m => m.SalonId, null, new { @class = "help-block text-danger" })
+                        </div>
+
+                        <label class="col-md-2 col-form-label">Director</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Director, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.Director, null, new { @class = "help-block text-danger" })
+                        </div>
+
+                        <label class="col-md-2 col-form-label">Banner</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Banner, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.Banner, null, new { @class = "help-block text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <button class="btn btn-sm btn-primary" type="submit" id="btnSubmit">
+                                <i class="fa fa-dot-circle-o"></i> Save
+                            </button>
+                            &nbsp;
+                            <a class="btn btn-sm btn-danger" href="~/Movies/List">
+                                <i class="fa fa-ban"></i> Cancel
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            @if (ViewBag.ErrorMessage != null && !string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                            {
+                                <div class="text-danger">
+                                    @ViewBag.ErrorMessage
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.col-->
+</div>
+
+
