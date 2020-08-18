@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
 
-                @using (Html.BeginForm("Edit", "Movies", FormMethod.Post, new { @class = "form-horizontal input-sm" }))
+                @using (Html.BeginForm("Edit", "Movies", FormMethod.Post, new { @class = "form-horizontal input-sm",enctype = "multipart/form-data"  }))
                 {
                     @Html.HiddenFor(m => m.Id)
 
@@ -47,10 +47,16 @@
                             @Html.ValidationMessageFor(m => m.Director, null, new { @class = "help-block text-danger" })
                         </div>
 
+                        @*<label class="col-md-2 col-form-label">Banner</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Banner, new { @class = "form-control input-sm" })
+                                @Html.ValidationMessageFor(m => m.Banner, null, new { @class = "help-block text-danger" })
+                            </div>*@
                         <label class="col-md-2 col-form-label">Banner</label>
                         <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Banner, new { @class = "form-control input-sm" })
-                            @Html.ValidationMessageFor(m => m.Banner, null, new { @class = "help-block text-danger" })
+                            @*<input type="file" name="banner" id="banner" accept=".jpg,.png,.JPEG,.jpeg,.gif" class="form-control" , required="required" />*@
+                            @Html.TextBoxFor(m => m.Banner, new { @class = "form-control input-sm",@type = "file", accept=".jpg,.png,.JPEG,.jpeg,.gif"})
+                            @Html.ValidationMessageFor(model => model.Banner, "", new { @class = "text-danger" })
                         </div>
                     </div>
 

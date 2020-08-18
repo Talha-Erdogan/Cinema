@@ -71,6 +71,7 @@
                         <thead>
                             <tr>
                                 <th style="width:210px;"> </th>
+                                <th>Banner</th>
                                 <th>Name</th>
                                 <th>Director</th>
                                 <th>Type Name</th>
@@ -86,6 +87,7 @@
                                     <a class="btn btn-sm btn-info" href="~/Movies/Edit/@item.Id">Edit</a>
                                     <a class="btn btn-sm btn-warning" href="~/Movies/Delete/@item.Id">Delete</a>
                                 </td>
+                                <td><img src="@item.Banner" height="30px;"width="30px;"/></td>
                                 <td>@item.Name</td>
                                 <td>@item.Director</td>
                                 <td>@item.Type_Name</td>

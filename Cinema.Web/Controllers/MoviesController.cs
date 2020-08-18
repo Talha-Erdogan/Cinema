@@ -7,8 +7,10 @@ using Cinema.Web.Filters;
 using Cinema.Web.Models.Movies;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace Cinema.Web.Controllers
@@ -131,7 +133,7 @@ namespace Cinema.Web.Controllers
 
         [AppAuthorizeFilter(AuthCodeStatic.MOVIES_ADD)]
         [HttpPost]
-        public ActionResult Add(Models.Movies.AddViewModel model)
+        public ActionResult Add(Models.Movies.AddViewModel model, HttpPostedFileBase banner)
         {
             if (!ModelState.IsValid)
             {
@@ -141,7 +143,11 @@ namespace Cinema.Web.Controllers
                 model.MoviesTypeSelectList = GetMoviesTypenSelectList(SessionHelper.CurrentUser.UserToken);
                 return View(model);
             }
-         
+            WebImage img = new WebImage(banner.InputStream);
+            FileInfo fotoinfo = new FileInfo(banner.FileName);
+            string newfoto = Guid.NewGuid().ToString() + fotoinfo.Extension;
+            img.Resize(150, 150);
+            img.Save("~/Uploads/MoviesBanner/" + newfoto);
 
             Business.Models.Movies.Movies movies = new Business.Models.Movies.Movies();
             movies.SeanceId = model.SeanceId;
@@ -149,7 +155,7 @@ namespace Cinema.Web.Controllers
             movies.Name = model.Name;
             movies.TypeId = model.TypeId;
             movies.Director = model.Director;
-            movies.Banner = model.Banner;
+            movies.Banner = "/Uploads/MoviesBanner/" + newfoto;
             var apiResponseModel = _moviesService.Add(SessionHelper.CurrentUser.UserToken, movies);
 
             if (apiResponseModel.ResultStatusCode == ResultStatusCodeStatic.Success)
@@ -172,7 +178,7 @@ namespace Cinema.Web.Controllers
         public ActionResult Edit(int id)
         {
             Models.Movies.AddViewModel model = new AddViewModel();
-                      var apiResponseModel = _moviesService.GetById(SessionHelper.CurrentUser.UserToken, id);
+            var apiResponseModel = _moviesService.GetById(SessionHelper.CurrentUser.UserToken, id);
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 //select lists
@@ -207,11 +213,11 @@ namespace Cinema.Web.Controllers
 
         [AppAuthorizeFilter(AuthCodeStatic.MOVIES_EDIT)]
         [HttpPost]
-        public ActionResult Edit(Models.Movies.AddViewModel model)
+        public ActionResult Edit(Models.Movies.AddViewModel model, HttpPostedFileBase Banner)
         {
             if (!ModelState.IsValid)
             {
-                                //select lists
+                //select lists
                 model.SeanceSelectList = GetSeanceSelectList(SessionHelper.CurrentUser.UserToken);
                 model.SalonSelectList = GetSalonSelectList(SessionHelper.CurrentUser.UserToken);
                 model.MoviesTypeSelectList = GetMoviesTypenSelectList(SessionHelper.CurrentUser.UserToken);
@@ -221,7 +227,7 @@ namespace Cinema.Web.Controllers
             var apiResponseModel = _moviesService.GetById(SessionHelper.CurrentUser.UserToken, model.Id);
             if (apiResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
-                           //select lists
+                //select lists
                 model.SeanceSelectList = GetSeanceSelectList(SessionHelper.CurrentUser.UserToken);
                 model.SalonSelectList = GetSalonSelectList(SessionHelper.CurrentUser.UserToken);
                 model.MoviesTypeSelectList = GetMoviesTypenSelectList(SessionHelper.CurrentUser.UserToken);
@@ -236,17 +242,25 @@ namespace Cinema.Web.Controllers
             {
                 return View("_ErrorNotExist");
             }
+
+            WebImage img = new WebImage(Banner.InputStream);
+            FileInfo fotoinfo = new FileInfo(Banner.FileName);
+            string newfoto = Guid.NewGuid().ToString() + fotoinfo.Extension;
+            img.Resize(150, 150);
+            img.Save("~/Uploads/MoviesBanner/" + newfoto);
+
             movies.SeanceId = model.SeanceId;
             movies.SalonId = model.SalonId;
             movies.Name = model.Name;
             movies.TypeId = model.TypeId;
             movies.Director = model.Director;
-            movies.Banner = model.Banner;
+            //movies.Banner = model.Banner;
+            movies.Banner = "/Uploads/MoviesBanner/" + newfoto;
             var apiEditResponseModel = _moviesService.Edit(SessionHelper.CurrentUser.UserToken, movies);
             if (apiEditResponseModel.ResultStatusCode != ResultStatusCodeStatic.Success)
             {
                 ViewBag.ErrorMessage = apiEditResponseModel.ResultStatusMessage != null ? apiEditResponseModel.ResultStatusMessage : "Not Edited";
-                          //select lists
+                //select lists
                 model.SeanceSelectList = GetSeanceSelectList(SessionHelper.CurrentUser.UserToken);
                 model.SalonSelectList = GetSalonSelectList(SessionHelper.CurrentUser.UserToken);
                 model.MoviesTypeSelectList = GetMoviesTypenSelectList(SessionHelper.CurrentUser.UserToken);
